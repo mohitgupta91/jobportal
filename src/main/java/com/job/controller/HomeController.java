@@ -3,6 +3,7 @@ package com.job.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.job.cache.StateCityCache;
 import com.job.constants.Caste;
+import com.job.constants.Constants;
 import com.job.constants.JobTypes;
 
 @Controller
@@ -51,21 +53,21 @@ public class HomeController {
 		map.put("states", cityList);
 		map.put("castes", Arrays.asList(Caste.values()));
 		map.put("jobTypes", Arrays.asList(JobTypes.values()));
-		
+		map.put("degree", Constants.degree);
 		return "search";
 	}
 		
-	@RequestMapping("view")
-	public String view(ModelMap map)
-	{
-		map.put("title","View");
-		return "view";
-	}
-	
 	@RequestMapping("getCity")
 	@ResponseBody
 	public List<String> getCities(@RequestParam String state)
 	{
 		return stateCityCache.getCache().get(state);
+	}
+	
+	@RequestMapping("getStates")
+	@ResponseBody
+	public Set<String> getStates()
+	{
+		return stateCityCache.getCache().keySet();
 	}
 }

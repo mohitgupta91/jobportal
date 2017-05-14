@@ -81,5 +81,19 @@ public class Qualifications extends BaseEntity{
 	public void setSubjects(String subjects) {
 		this.subjects = subjects;
 	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "Qualifications [id=" + id + ", degree=" + degree + ", college=" + college + ", university=" + university
+				+ ", passYear=" + passYear + ", grade=" + grade + ", subjects=" + subjects + "]";
+	}
 	
 }

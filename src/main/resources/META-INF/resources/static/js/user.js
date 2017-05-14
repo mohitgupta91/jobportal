@@ -9,16 +9,16 @@ $(document).ready(function() {
   		   type : 'POST',
   		   data : { passwd : $("#userpasswd").val()},
   		  success: function(data) {
-  			     $('#notification-bar').text('Password Successfully Changed');
-  		         $('#notification-bar').attr('class','alert fade in alert-success');
-  		         $('#notification-bar').show();
+  			     $('#notification-msg').html('Password Successfully Changed');
+  		         $('#notification').attr('class','alert fade in alert-success');
+  		         $('#notification').show();
   		         $('#chPwd').modal('hide');
 		      },
   		  error: function() {
-		         	$('#notification-bar').text('Error Occured While Changing Password. Contact Admin');
-		         	$('#notification-bar').attr('class','alert fade in alert-danger');
+		         	$('#notification-msg').text('Error Occured While Changing Password. Contact Admin');
+		         	$('#notification').attr('class','alert fade in alert-danger');
 		         	$('#chPwd').modal('hide');
-		         	$('#notification-bar').show();
+		         	$('#notification').show();
 		      	}
   		   });
     });

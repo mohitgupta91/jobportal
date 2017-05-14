@@ -38,8 +38,10 @@
    		<jsp:include page="header.jsp"/>
 	
         <div class="container" style="padding:none" id="searchForms">
+    <h5>Registration ID : ${data.registrationId}</h5>
             <div class="row">
-                 <form name="addForm" id="addForm">
+            
+                 <form name="editForm" id="editForm">
 <%--                  action="<c:url value="/register/add"/>" method="post"> --%>
                  
                     <div class="col-lg-8 ">
@@ -51,24 +53,25 @@
                           <br>
                    	 <div class="collapse" id="personalInfo"> 
                    	 	<div class="row control-group col-lg-offset-2">
+                   	 	<input type="hidden" name="personalInfo[registrationId]" value="${data.registrationId}">
                             <div  class="form-group col-xs-8 floating-label-form-group controls">
                                 <label>Full Name</label>                            
-                                <input class="form-control" required placeholder="Name" id="name" name="personalInfo[name]" >
+                                <input class="form-control" placeholder="Name" id="name" value="${data.name}" name="personalInfo[name]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-8 floating-label-form-group controls">
                                 <label>Email ID</label>                            
-                                <input class="form-control" required type="email" placeholder="Email Id" id="emailId" name="personalInfo[email]" >
+                                <input class="form-control" placeholder="Email Id" id="emailId" value="${data.email}" name="personalInfo[email]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
-                        <div class="row control-group col-lg-offset-2 input-group">
+                        <div class="row control-group col-lg-offset-2 input-group date">
 <!-- 							<div class="input-group-addon"><i class="fa fa-calendar"></i></div> -->
                   			<div  class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Date Of Birth</label>                            
-                                <input class="form-control pull-right date"  required type="text" placeholder="Date Of Birth" id="dob" name="personalInfo[dob]" >
+                                <input class="form-control pull-right datepicker"  value="${data.dob}" type="text" placeholder="Date Of Birth" id="dob" name="personalInfo[dob]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -76,31 +79,56 @@
                         <div class="row control-group col-lg-offset-2">
                         	<div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Father's Name</label>                            
-                                <input class="form-control" placeholder="Father's Name" required id="fatherName" name="personalInfo[fatherName]" >
+                                <input class="form-control" placeholder="Father's Name" id="fatherName" value="${data.fatherName}" name="personalInfo[fatherName]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                            	<div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Mother's Name</label>                            
-                                <input class="form-control" placeholder="Mother's Name" required id="motherName" name="personalInfo[motherName]" >
+                                <input class="form-control" placeholder="Mother's Name" id="motherName" value="${data.motherName}" name="personalInfo[motherName]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>    
                         <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-4 floating-label-form-group controls">
                               <label >Gender</label>
-                                <select class="form-control col-xs-4 " required id="gender" name="personalInfo[gender]" >
-                               	 	<option selected disabled>Gender</option>
-                                	<option value="m">Male</option>
-                                	<option value="f">Female</option>
-                                	<option value="o">Other</option>
+                                <select class="form-control col-xs-4 " id="gender" name="personalInfo[gender]" >
+                               	 	<c:choose>
+                                	 	<c:when test="${data.gender == 'm'}">
+                                	 	<option selected value="m">Male</option>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<option value="m">Male</option>
+                                		</c:otherwise>
+                                		</c:choose>
+                                		<c:choose>
+                                	 	<c:when test="${data.gender == 'f'}">
+                                	 		<option selected value="f">Female</option>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<option value="f">Female</option>
+                                		</c:otherwise>
+                                		</c:choose>	<c:choose>
+                                	 	<c:when test="${data.gender == 'o'}">
+                                	 		<option selected value="o">Other</option>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<option value="o">Other</option>
+                                		</c:otherwise>
+                                		</c:choose>
                                 </select>
                             </div>
                             <div  class="form-group col-xs-4 floating-label-form-group controls">
                             	<label>Caste</label>
-                                	<select class="form-control col-xs-4"  required id="caste" name="personalInfo[caste]" >
-                                	<option selected disabled>Caste</option>
+                                	<select class="form-control col-xs-4"  id="caste" name="personalInfo[caste]" >
                                 	 <c:forEach var="caste" items="${castes}">
-                                		<option value="${caste.value}">${caste.value}</option>
+                                	 	<c:choose>
+                                	 	<c:when test="${caste.value == data.caste.value}">
+                                			<option selected value="${caste.value}">${caste.value}</option>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<option  value="${caste.value}">${caste.value}</option>
+                                		</c:otherwise>
+                                		</c:choose>
                                 	</c:forEach>
                                 </select>
                             </div>
@@ -111,15 +139,29 @@
                             <br>
                         	<div  class="form-group col-xs-4 floating-label-form-group controls">
                             	<label>Marital Status</label>
-                                <select class="form-control col-xs-4"  required id="maritalStatus" name="personalInfo[maritalStatus]" >
-                       	    	    <option selected disabled>Marital Status</option>
-                        	        <option value="Single">Single</option>
-                                	<option value="Married">Married</option>
+                                <select class="form-control col-xs-4"  id="maritalStatus" name="personalInfo[maritalStatus]" >
+                       	    	    <c:choose>
+                                	 	<c:when test="${data.maritalStatus == 'Single'}">
+                                	 	<option selected value="Single">Single</option>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<option value="Single">Single</option>
+                                		</c:otherwise>
+                                		</c:choose>
+                                		  <c:choose>
+                                	 	<c:when test="${data.maritalStatus == 'Married'}">
+                                	 		<option selected value="Married">Married</option>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<option value="Married">Married</option>
+                                		</c:otherwise>
+                                		</c:choose>
+                                	
                                 </select>
                             </div>
                         	<div  class="form-group col-xs-4 floating-label-form-group controls">
                             	<label>Spouse's Name</label>                            
-                                <input class="form-control" placeholder="Spouse's Name" id="spouseName" name="personalInfo[spouseName]" >
+                                <input class="form-control" placeholder="Spouse's Name" id="spouseName" value="${spouseName}" name="personalInfo[spouseName]" >
 <!--                                 <p class="help-block text-danger"></p> -->
                            </div>
                         </div>
@@ -129,7 +171,7 @@
                         	<div  class="form-group col-xs-4 floating-label-form-group controls">
                             	<label>ID Type</label>
                                 <select class="form-control col-xs-4"  id="idType" name="personalInfo[idType]" >
-                       	    	    <option selected disabled>Id Type</option>
+                       	    	    <option selected value="${data.idType}">${data.idType}</option>
                        	    	    <option value="dl">Driving License</option>
                        	    	    <option value="passport">Passport</option>
                        	    	    <option value="aadhar">Aadhar Card</option>
@@ -138,19 +180,19 @@
                             </div>
                         	<div  class="form-group col-xs-4 floating-label-form-group controls">
                             	<label>ID Number</label>                            
-                                <input class="form-control" placeholder="ID Number" id="idNumber" name="personalInfo[idNumber]" required>
+                                <input class="form-control" placeholder="ID Number" id="idNumber" value="${data.idNumber}" name="personalInfo[idNumber]" >
                            </div>
                         </div>
           				<br>
           				<div class="row control-group col-lg-offset-2">
                         	<div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Contact Number</label>                            
-                                <input class="form-control" placeholder="Contact Number" id="contactNumber1" name="personalInfo[contactNumber]" type="number" required>
+                                <input class="form-control" placeholder="Contact Number" id="contactNumber1" value="${data.contactNumber}" name="personalInfo[contactNumber]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                            	<div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Other Number</label>                            
-                                <input class="form-control" placeholder="Other Number" id="otherNumber" name="personalInfo[contactNumber2]" type="number">
+                                <input class="form-control" placeholder="Other Number" id="otherNumber" value="${data.contactNumber2}" name="personalInfo[contactNumber2]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -161,18 +203,23 @@
                         <div class="row control-group col-lg-offset-2">
                         	<div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Year</label>                            
-                                <input class="form-control" placeholder="Years" id="expYears" name="personalInfo[expYear]" min=0 type="number">
+                                <input class="form-control" placeholder="Years" id="expYears" value="${data.totalExperience div 12}"name="personalInfo[expYear]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                            	<div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Months</label>                            
-                                <input class="form-control" placeholder="Months" id="expMonths" name="personalInfo[expMonths]" type="number" min=0 max=12>
+                                <input class="form-control" placeholder="Months" id="expMonths" value="${data.totalExperience%12}" name="personalInfo[expMonths]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <br>
                         <div class="row control-group col-lg-offset-2">
-                        	<input type="checkbox" name=personalInfo[computerSkill] >Computer Proficient
+                        	<c:if test="${data.computerSkill == true }">
+                        		<input type="checkbox"  checked name=personalInfo[computerSkill] >Computer Proficient
+                        	</c:if>
+                        	<c:if test="${data.computerSkill == false }">
+                        		<input type="checkbox"  name=personalInfo[computerSkill] >Computer Proficient
+                        	</c:if>	
                         </div>    
                     	</div>    
                        </div>
@@ -184,38 +231,43 @@
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
                      <br>
-                     
+                      <input type="hidden" value="${data.permanentAddress.id}" name="permanentAddress[id]">
                       <div class="collapse" id="addInfo"> 
                        <div class="row control-group col-lg-offset-2">
                             <label>Permanent Address</label>
                             <br>
                             <div  class="form-group col-xs-12 floating-label-form-group controls">
 								<label>Address</label> 
-								<input class="form-control" required placeholder="Address" id="address" name="permamentAddress[address]" >
+								<input class="form-control" placeholder="Address" id="address" value="${data.permanentAddress.address}" name="permamentAddress[address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
-									id="state" name="permamentAddress[state]" required>
-									<option selected disabled>State</option>
+									id="state" name="permamentAddress[state]">
 									<c:forEach var="state" items="${states}">
+									<c:choose>
+									<c:when test="${state == data.permanentAddress.state }">
+										<option selected value="${state}">${state}</option>
+									</c:when>
+									<c:otherwise>
 										<option value="${state}">${state}</option>
+									</c:otherwise>
+									</c:choose>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group col-xs-6 floating-label-form-group controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
-									id="city" name="permamentAddress[city]" required>
-									<option selected disabled>City</option>
-									<option value="Nagpur">Nagpur</option>
+									id="city" name="permamentAddress[city]">
+									<option selected value="${data.permanentAddress.city}">${data.permanentAddress.city}</option>
 								</select>
 							</div>
 						</div>   
                        <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Tehsil/Taluka</label> 
-								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" name="permamentAddress[tehsil]" >
+								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" value="${data.permanentAddress.tehsil}" name="permamentAddress[tehsil]" >
 							</div>
 						</div>
 						
@@ -224,32 +276,39 @@
                        <div class="row control-group col-lg-offset-2">
                             <label>Temporary Address</label>
                             <br>
+                            <input type="hidden" value="${data.temporaryAddress.id}" name="temporaryAddress[id]">
                             <div  class="form-group col-xs-12 floating-label-form-group controls">
 								<label>Address</label> 
-								<input class="form-control" required placeholder="Address" id="address" name="temporaryAddress[address]" >
+								<input class="form-control" placeholder="Address" id="address" value="${data.temporaryAddress.address}" name="temporaryAddress[address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
-									id="state" name="temporaryAddress[state]" required>
-									<option selected disabled>State</option>
+									id="state" name="temporaryAddress[state]">
 									<c:forEach var="state" items="${states}">
+									<c:choose>
+									<c:when test="${state == data.temporaryAddress.state }">
+										<option selected value="${state}">${state}</option>
+									</c:when>
+									<c:otherwise>
 										<option value="${state}">${state}</option>
+									</c:otherwise>
+									</c:choose>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="form-group col-xs-6 floating-label-form-group controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
 									id="city" name="temporaryAddress[city]">
-									<option selected disabled>City</option>
+									<option selected value="${data.temporaryAddress.city}">${data.temporaryAddress.city}</option>
 								</select>
 							</div>
 						</div>   
                        <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Tehsil/Taluka</label> 
-								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" name="temporaryAddress[tehsil]" >
+								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" value="${data.temporaryAddress.tehsil}" name="temporaryAddress[tehsil]" >
 							</div>
 						</div>
 						</div>
@@ -262,8 +321,64 @@
                      	</div>
                      <br>
                      <div class="collapse" id="qualInfo"> 
-                     <div id="qual1">
+                     <c:set var="qualIndex" value="0" />
+                     <c:forEach var="qual" items="${data.qualifications}" varStatus="loop">
+                     <c:set var="qualIndex" value="${qualIndex+1}" />
+                     <div id="qual${qualIndex}">
+                     <input type="hidden" value="${qual.id}" name="qualifications[][id]">                          
                      <div class="row control-group col-lg-offset-2">
+                           <label>Qualification ${loop.index+1}</label>
+                            <br>
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>Degree</label>                            
+                                <select class="form-control col-xs-6"
+									id="degree" name="qualifications[][degree]">
+									<option selected disabled>Degree</option>
+									<c:forEach var="degree" items="${degree}">
+									<c:choose>
+									<c:when test="${degree == qual.degree }">	
+										<option selected value="${degree}">${degree}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${degree}">${degree}</option>
+									</c:otherwise>
+									</c:choose>
+									</c:forEach>
+								</select>
+							</div>
+                         </div>
+                          <div class="row control-group col-lg-offset-2">
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>College</label>
+                                <input class="form-control" value="${qual.college}" placeholder="College" id="college" name="qualifications[][college]" >
+                            </div>
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>University</label>
+                                <input class="form-control" placeholder="University" value="${qual.university}" id="university" name="qualifications[][university]" >
+                            </div>
+                          </div> 
+                          <div class="row control-group col-lg-offset-2">
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>Grade</label>
+                                <input class="form-control" placeholder="Grade" id="grade" value="${qual.grade}" name="qualifications[][grade]" >
+                            </div>
+                              <div  class="form-group col-xs-12 floating-label-form-group controls">
+								<label>Year</label> 
+								<input class="form-control" placeholder="Year" id="year" value="${qual.passYear}" name="qualifications[][passYear]" >
+							</div>
+                          </div>
+                          <div class="row control-group col-lg-offset-2">
+                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+								<label>Subjects</label> 
+								<input class="form-control" placeholder="Subjects" id="subjects" value="${qual.subjects}" name="qualifications[][subjects]" >
+							</div>
+						</div><br><br>
+						</div>
+						</c:forEach>
+						<c:if test="${qualIndex==0}">
+						<c:set var="qualIndex" value="${qualIndex+1}" />
+						<div id="qual1">
+                     	<div class="row control-group col-lg-offset-2">
                            <label>Qualification 1</label>
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
@@ -279,12 +394,12 @@
                          </div>
                           <div class="row control-group col-lg-offset-2">
                             <div class="form-group col-xs-6 floating-label-form-group controls">
-                                <label>School/College</label>
-                                <input class="form-control" placeholder="School/College" id="college" name="qualifications[][college]" >
+                                <label>College</label>
+                                <input class="form-control" placeholder="College" id="college" name="qualifications[][college]" >
                             </div>
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>University</label>
-                                <input class="form-control" placeholder="Board/University" id="university" name="qualifications[][university]" >
+                                <input class="form-control" placeholder="University" id="university" name="qualifications[][university]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
@@ -294,7 +409,7 @@
                             </div>
                               <div  class="form-group col-xs-12 floating-label-form-group controls">
 								<label>Year</label> 
-								<input class="form-control" placeholder="Year of Graduation" id="year" name="qualifications[][passYear]" >
+								<input class="form-control" placeholder="Year" id="yaer" name="qualifications[][passYear]" >
 							</div>
                           </div>
                           <div class="row control-group col-lg-offset-2">
@@ -304,7 +419,8 @@
 							</div>
 						</div><br><br>
 						</div>
-						
+						</c:if>
+						<input type="hidden" id="qualIndex" value="${qualIndex}">
     					<div class="row col-lg-offset-2">
                             <div  class="form-group col-xs-12 ">
 								<button type="button" class="btn btn-info" id="qualAdd" onclick="addQualification()">Add Qualification</button>
@@ -321,6 +437,82 @@
                      	</div>
                      <br>
                      <div class="collapse" id="expInfo"> 
+                     <c:set var="wexIndex" value="0" />
+                     <c:forEach var="wexp" items="${data.workExp}" varStatus="loop">
+                     <c:if test="${wexp.training != true}">
+                     <c:set var="wexIndex" value="${wexIndex+1}"/>
+                     <div id="wexp${wexIndex}">
+                     <div class="row control-group col-lg-offset-2">
+                           <label>Job ${wexIndex}</label>
+                           <input type="hidden" value="${wexp.id}" name="workExperience[][id]">
+                            <br>
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>Job Title</label>                            
+                                <input class="form-control" placeholder="Job Title" id="jobTitle" value="${wexp.jobTitle}" name="workExperience[][jobTitle]" >
+                            </div>
+                         </div>
+                          <div class="row control-group col-lg-offset-2 input-group date">
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>From</label>
+                                <input class="form-control pull-right datepicker" placeholder="From Date" value="${wexp.fromDate}" id="fromDate1" name="workExperience[][fromDate]" >
+                            </div>
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>To</label>
+                                <input class="form-control pull-right datepicker" placeholder="To Date" id="toDate1" value="${wexp.toDate}" name="workExperience[][toDate]" >
+                            </div>
+                          </div> 
+                          <div class="row control-group col-lg-offset-2">
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>Company Name</label>
+                                <input class="form-control" placeholder="Company Name" id="companyName" value="${wexp.company}" name="workExperience[][company]" >
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row control-group col-lg-offset-2">
+                            <div class="row control-group col-lg-offset-2">
+                            <label>Company Address</label>
+                            <br>
+                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+								<label>Address</label> 
+								<input class="form-control" placeholder="Address" id="address" value="${wexp.address.address}" name="workExperience[][address][address]" >
+							</div>
+						</div>
+                       <div class="row control-group col-lg-offset-2">
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+								<label>State</label> <select class="form-control col-xs-6 state"
+									id="state" name="workExperience[][address][state]">
+									<option selected disabled>State</option>
+									<c:forEach var="state" items="${states}">
+									<c:choose>
+									<c:when test="${state == wexp.address.state }">
+										<option selected value="${state}">${state}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${state}">${state}</option>
+									</c:otherwise>
+									</c:choose>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group col-xs-6 floating-label-form-group controls">
+								<label>City</label> <select class="form-control col-xs-6 city"
+									id="city" name="workExperience[][address][city]">
+									<option selected value="${wexp.address.city}">${wexp.address.city}</option>
+								</select>
+							</div>
+						</div>   
+                       <div class="row control-group col-lg-offset-2">
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+								<label>Tehsil/Taluka</label> 
+								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" value="${wexp.address.tehsil}" name="workExperience[][address][tehsil]" >
+							</div>
+						</div>
+                     </div>
+                     </div>
+                     </c:if>
+                     </c:forEach>
+                     <c:if test="${wexIndex == 0 }">
+                     <c:set var="wexIndex" value="${wexIndex+1}" />
                      <div id="wexp1">
                      <div class="row control-group col-lg-offset-2">
                            <label>Job 1</label>
@@ -330,14 +522,14 @@
                                 <input class="form-control" placeholder="Job Title" id="jobTitle" name="workExperience[][jobTitle]" >
                             </div>
                          </div>
-                          <div class="row control-group col-lg-offset-2 input-group">
+                          <div class="row control-group col-lg-offset-2 input-group date">
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>From</label>
-                                <input class="form-control pull-right date" placeholder="From Date" id="fromDate1" name="workExperience[][fromDate]" >
+                                <input class="form-control pull-right datepicker" placeholder="From Date" id="fromDate1" name="workExperience[][fromDate]" >
                             </div>
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>To</label>
-                                <input class="form-control pull-right date" placeholder="To Date" id="toDate1" name="workExperience[][toDate]" >
+                                <input class="form-control pull-right datepicker" placeholder="To Date" id="toDate1" name="workExperience[][toDate]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
@@ -370,6 +562,7 @@
 								<label>City</label> <select class="form-control col-xs-6 city"
 									id="city" name="workExperience[][address][city]">
 									<option selected disabled>City</option>
+									<option value="Nagpur">Nagpur</option>
 								</select>
 							</div>
 						</div>   
@@ -379,9 +572,10 @@
 								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" name="workExperience[][address][tehsil]" >
 							</div>
 						</div>
+					     </div>
                      </div>
-                     </div>
-                     
+                     </c:if>
+                     <input type="hidden" value="${wexIndex}" id="wexIndex">
                      	<div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 ">
                             <br><br><br>
@@ -399,14 +593,91 @@
                      	</div>
                      <br>
                      <div class="collapse" id="trainingInfo"> 
+                     <c:set var="trIndex" value="0"/>
+                     
+                     <c:forEach var="train" items="${data.workExp}" varStatus="loop">
+                     <c:if test="${train.training == true }">
+                     <c:set var="trIndex" value="${trIndex+1 }"/>
+                     <div id="train${trIndex}">
+                     <div class="row control-group col-lg-offset-2">
+                     	
+                           <label>Training ${trIndex }</label>
+                           <input type="hidden" value="${train.id}" name="training[][id]">
+                            <br>
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>Job Title</label>                            
+                                <input class="form-control" placeholder="Job Title" id="jobTitle" value="${train.jobTitle}" name="training[][jobTitle]" >
+                            </div>
+                         </div>
+                          <div class="row control-group col-lg-offset-2 input-group date">
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>From</label>
+                                <input class="form-control pull-right datepicker" placeholder="From Date" value="${train.fromDate}" id="trfromDate1" name="training[][fromDate]" >
+                            </div>
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>To</label>
+                                <input class="form-control pull-right datepicker" placeholder="To Date" value="${train.toDate}" id="trtoDate1" name="training[][toDate]" >
+                            </div>
+                          </div> 
+                          <div class="row control-group col-lg-offset-2">
+                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                                <label>Company Name</label>
+                                <input class="form-control" placeholder="Company Name" id="companyName" value="${train.company}" name="training[][company]" >
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row control-group col-lg-offset-2">
+                            <div class="row control-group col-lg-offset-2">
+                            <label>Company Address</label>
+                            <br>
+                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+								<label>Address</label> 
+								<input class="form-control" placeholder="Address" id="address" value="${train.address.address}" name="training[][address][address]" >
+							</div>
+						</div>
+                       <div class="row control-group col-lg-offset-2">
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+								<label>State</label> <select class="form-control col-xs-6 state"
+									id="state" name="training[][address][state]">
+									<c:forEach var="state" items="${states}">
+									<c:choose>
+									<c:when test="${state == train.address.state }">
+										<option selected value="${state}">${state}</option>
+									</c:when>
+									<c:otherwise>
+										<option value="${state}">${state}</option>
+									</c:otherwise>
+									</c:choose>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group col-xs-6 floating-label-form-group controls">
+								<label>City</label> <select class="form-control col-xs-6 city"
+									id="city" name="training[][address][city]">
+									<option selected value="${train.address.city}">${train.address.city}</option>
+								</select>
+							</div>
+						</div>   
+                       <div class="row control-group col-lg-offset-2">
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+								<label>Tehsil/Taluka</label> 
+								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" value="${train.address.tehsil}" name="training[][address][tehsil]" >
+							</div>
+						</div>
+						</div>						
+                     </div>
+                     </c:if>
+                     </c:forEach>
+                     <c:if test="${trIndex==0 }">
                      <div id="train1">
+                     <c:set var="trIndex" value="${trIndex+1 }"/>
                      <div class="row control-group col-lg-offset-2">
                      	
                            <label>Training 1</label>
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Job Title</label>                            
-                                <input class="form-control"  placeholder="Job Title" id="jobTitle" name="training[][jobTitle]" >
+                                <input class="form-control" placeholder="Job Title" id="jobTitle" name="training[][jobTitle]" >
                             </div>
                          </div>
                           <div class="row control-group col-lg-offset-2 input-group date">
@@ -422,7 +693,7 @@
                           <div class="row control-group col-lg-offset-2">
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Company Name</label>
-                                <input class="form-control" placeholder="Company Name" required id="companyName" name="training[][company]" >
+                                <input class="form-control" placeholder="Company Name" id="companyName" name="training[][company]" >
                             </div>
                           </div>
                           <br>
@@ -432,7 +703,7 @@
                             <br>
                             <div  class="form-group col-xs-12 floating-label-form-group controls">
 								<label>Address</label> 
-								<input class="form-control"  placeholder="Address" id="address" name="training[][address][address]" >
+								<input class="form-control" placeholder="Address" id="address" name="training[][address][address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
@@ -460,7 +731,8 @@
 						</div>
 						</div>						
                      </div>
-                     
+                     </c:if>
+                     <input type="hidden" value="${trIndex}" id="trIndex">
             	         <div class="row control-group col-lg-offset-2" id="trAddRemDiv">
                             <br><br><br>
                             <div  class="col-xs-6 ">
@@ -484,9 +756,16 @@
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Type</label> 
 								<select  class="form-control col-xs-6" 	id="jobType" name="jobType">
-									<option selected disabled>Job Type</option>
+									<option value="">Job Type</option>
 									<c:forEach var="jt" items="${jobTypes}">
+                                	<c:choose>
+                                	<c:when test="${jt == data.jobRequirement }">
+                                		<option selected value="${jt}">${jt.jobType}</option>
+                                	</c:when>
+                                	<c:otherwise>
                                 		<option value="${jt}">${jt.jobType}</option>
+                                	</c:otherwise>
+                                	</c:choose>
                                 	</c:forEach>
 								</select>
 							</div>
@@ -500,6 +779,7 @@
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
                      <br>
+<%--                      <input type="hidden" value="${data.preferance.id}" name="jobPreferance[id]"> --%>
                      <div class="collapse" id="jpInfo"> 
                            <div class="row control-group col-lg-offset-2">
                             <label>Location</label>
@@ -507,27 +787,45 @@
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Location 1</label> 
 								<select  class="form-control col-xs-6" 	id="location1" name="jobPreferance[location1]">
-									<option selected disabled>City1</option>
 									<c:forEach var="city" items="${cities}">
+                                	<c:choose>
+                                	<c:when test="${city == data.preferance.location1 }">
+                                		<option selected value="${city}">${city}</option>
+                                	</c:when>
+                                	<c:otherwise>
                                 		<option value="${city}">${city}</option>
+                                	</c:otherwise>
+                                	</c:choose>
                                 	</c:forEach>
 								</select>
 							</div>
 							<div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Location 2</label> 
 								<select  class="form-control col-xs-6" 	id="location2" name="jobPreferance[location2]">
-									<option selected disabled>City2</option>
 									<c:forEach var="city" items="${cities}">
+                                	<c:choose>
+                                	<c:when test="${city == data.preferance.location2 }">
+                                		<option selected value="${city}">${city}</option>
+                                	</c:when>
+                                	<c:otherwise>
                                 		<option value="${city}">${city}</option>
+                                	</c:otherwise>
+                                	</c:choose>
                                 	</c:forEach>
 								</select>
 							</div>
 							<div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Location 3</label> 
 								<select  class="form-control col-xs-6" 	id="location3" name="jobPreferance[location3]">
-									<option selected disabled>City3</option>
 									<c:forEach var="city" items="${cities}">
+                                	<c:choose>
+                                	<c:when test="${city == data.preferance.location3 }">
+                                		<option selected value="${city}">${city}</option>
+                                	</c:when>
+                                	<c:otherwise>
                                 		<option value="${city}">${city}</option>
+                                	</c:otherwise>
+                                	</c:choose>
                                 	</c:forEach>
 								</select>
 							</div>
@@ -535,17 +833,31 @@
 						<div class="row control-group col-lg-offset-2">
 							<div class="form-group col-xs-6 floating-label-form-group controls">
     						<select  class="form-control col-xs-6" 	id="shift" name="jobPreferance[shift]">
-								<option selected disabled>Shift</option>
-								<option value="NIGHT">Night Shift</option>
-								<option value="DAY">Day Shift</option>
-								<option value="ANY">Any Shift</option>
+								<option value="">Shift</option>
+								<c:if test="${data.preferance.shift == 'NIGHT' }">
+									<option selected value="NIGHT">Night Shift</option>
+									<option value="DAY">Day Shift</option>
+									<option value="ANY">Any Shift</option></c:if>
+								<c:if test="${data.preferance.shift == 'DAY' }">
+									<option selected value="DAY">Day Shift</option>
+									<option selected value="NIGHT">Night Shift</option>
+									<option selected value="ANY">Any Shift</option></c:if>
+								<c:if test="${data.preferance.shift == 'ANY' }">
+									<option selected value="ANY">Any Shift</option>
+									<option value="DAY">Day Shift</option>
+									<option value="NIGHT">Night Shift</option>
+								</c:if>
 							</select>   
                         	</div>
                         </div>
                         <br>
                      	<div class="row control-group col-lg-offset-2">
-  
-					   <input type="checkbox" name=jobPreferance[abroad] >Willing to Work Abroad
+  						<c:if test="${data.preferance.abroad == true }">
+  							<input type="checkbox" checked name=jobPreferance[abroad] >Willing to Work Abroad
+  						</c:if>
+					   <c:if test="${data.preferance.abroad == false }">
+  							<input type="checkbox" name=jobPreferance[abroad] >Willing to Work Abroad
+  						</c:if>
                         </div>
                         </div>
 					</div>   
@@ -562,12 +874,12 @@
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Current</label>                            
-                                <input class="form-control" required type="number" placeholder="Current Salary (p.a)" id="currentSalary" name="personalInfo[currentSalary]" >
+                                <input class="form-control" placeholder="Current Salary (p.a)" id="currentSalary" value="${data.currentSalary}" name="personalInfo[currentSalary]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Expected</label>
-                                <input class="form-control" required type="number" placeholder="Expected Salary (p.a)" id="expectedSalary" name="personalInfo[expectedSalary]" >
+                                <input class="form-control" placeholder="Expected Salary (p.a)" id="expectedSalary" value="${data.expectedSalary}" name="personalInfo[expectedSalary]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -576,7 +888,7 @@
                         <div class="row">
                             <div class="form-group col-xs-12">
                             <br><br><br>
-                                <button type="button" class="btn btn-success btn-lg" id="addBtn">Add</button>
+                                <button  class="btn btn-success btn-lg" >Update</button>
                             </div>
                         </div>
                     </form>
@@ -611,7 +923,7 @@
     <script src="/static/js/freelancer.js"></script>
     
     <script src="/static/js/menu.js"></script>
-    <script src="/static/js/add.js"></script>
+    <script src="/static/js/edit.js"></script>
     <script src="/static/js/jquery.serialize-object.min.js"></script>
     <script src="/static/js/bootstrap-datepicker.js"></script>
 	

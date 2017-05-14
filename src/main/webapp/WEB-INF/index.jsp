@@ -302,7 +302,7 @@
     <script src="static/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="static/js/freelancer.min.js"></script>
+    <script src="static/js/freelancer.js"></script>
 
 </body>
 

@@ -216,7 +216,7 @@
     <script src="/static/js/jqBootstrapValidation.js"></script>
     <script src="/static/js/user.js"></script>
     <script src="/static/js/contact_me.js"></script>
-    <script src="/static/js/freelancer.min.js"></script>
+    <script src="/static/js/freelancer.js"></script>
 	<script src="/static/js/menu.js"></script>
 	
     

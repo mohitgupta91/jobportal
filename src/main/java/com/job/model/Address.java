@@ -19,9 +19,6 @@ public class Address extends BaseEntity {
 	@Column(name = "address", nullable = false)
 	private String address;
 
-	@Column(name = "address_line2")
-	private String address2;
-
 	@Column(name = "city", nullable = false)
 	private String city;
 
@@ -45,14 +42,6 @@ public class Address extends BaseEntity {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getAddress2() {
-		return address2;
-	}
-
-	public void setAddress2(String address2) {
-		this.address2 = address2;
 	}
 
 	public String getCity() {

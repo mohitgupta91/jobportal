@@ -36,15 +36,28 @@
 
          <jsp:include page="menu.jsp"/>
    		<jsp:include page="header.jsp"/>
-
-
-        <div class="container " style="padding:none" id="searchForms">
+	<br>
+	<div class="container ">
+		<div class="row">
+			<div class="well well-sm">
+				<form id="searchByIdForm" method="post">
+				    <div align="center">
+                     <label>Search By ID :</label>&nbsp;&nbsp;                            
+                     <input placeholder=" Registeration ID" name="regID" id="regID">
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <button id="idBtn" type="submit" class="btn btn-small btn-info" >Go!</button>    
+                     </div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="container " style="padding:none" id="searchForms">
             <div class="row">
                  <form name="searchForm" id="searchForm" action="<c:url value="/search/getResult"/>" method="post">
                  
                     <div class="col-lg-8 ">
                         <div class="modal-body" >
-                            <h2>Personal Information <a id="per-btn" data-toggle="collapse" data-target="#personalInfo"><span><i class="toggle-icon fa fa-chevron-down"></i></span></a> </h2>
+                            <h2>Personal Information <a id="per-btn" data-toggle="collapse" data-target="#personalInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a> </h2>
                         
                           <br>
                         <div class="collapse" id="personalInfo">  
@@ -104,14 +117,14 @@
                                 <select class="form-control col-xs-4"  id="caste" name="caste" >
                                 <option selected disabled>Caste</option>
                                 <c:forEach var="caste" items="${castes}">
-                                	<option value="${caste.value}">${caste.value}</option>
+                                	<option value="${caste}">${caste.value}</option>
                                 </c:forEach>
                                 </select>
                                 <p class="help-block text-danger"></p>
                             </div>
                         	<div  class="form-group col-xs-4 floating-label-form-group controls">
                             	<label>Marital Status</label>
-                                <select class="form-control col-xs-4"  id="city" name="city" >
+                                <select class="form-control col-xs-4"  id="maritalStatus" name="maritalStatus" >
                                 <option selected disabled>Marital Status</option>
                                 <option value="Single">Single</option>
                                 <option value="Married">Married</option>
@@ -127,7 +140,7 @@
  
  					<div class="col-lg-8 ">
                         <div class="modal-body">
-                            <h2>Education <a id="edu-btn" data-toggle="collapse" data-target="#eduInfo"><span><i class="toggle-icon fa fa-chevron-down"></i></span></a> </h2>
+                            <h2>Education <a id="edu-btn" data-toggle="collapse" data-target="#eduInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a> </h2>
                      <br>
                      <div class="collapse" id="eduInfo"> 
                        <div class="row control-group col-lg-offset-2">
@@ -136,9 +149,9 @@
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Qualifications</label> 
 								<select  class="form-control col-xs-6" 	multiple="multiple" id="qualifications" name="qualifications">
-									<option selected disabled>Qualifications</option>
-									<option value="B.A.">B.A</option>
-									<option value="M.A.">M.A</option>
+								<c:forEach var="degree" items="${degree}">
+									<option value="${degree}">${degree}</option>
+								</c:forEach>
 								</select>
 								<p class="help-block text-danger"></p>
 							</div>
@@ -149,7 +162,7 @@
                        
                     <div class="col-lg-8 ">
                         <div class="modal-body">
-                            <h2>Experience  <a id="exp-btn" data-toggle="collapse" data-target="#expInfo"><span><i class="toggle-icon fa fa-chevron-down"></i></span></a></h2>
+                            <h2>Experience  <a id="exp-btn" data-toggle="collapse" data-target="#expInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	
                      <br>
                     <div class="collapse" id="expInfo">
@@ -173,7 +186,7 @@
                        
                     <div class="col-lg-8 ">
                         <div class="modal-body">
-                            <h2>Job Function <a id="jf-btn" data-toggle="collapse" data-target="#jfInfo"><span><i class="toggle-icon fa fa-chevron-down"></i></span></a></h2>
+                            <h2>Job Function <a id="jf-btn" data-toggle="collapse" data-target="#jfInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      <br>
                     <div class="collapse" id="jfInfo">
                            <div class="row control-group col-lg-offset-2">
@@ -182,7 +195,7 @@
 								<select  class="form-control col-xs-6" 	id="jobType" name="jobType">
 									<option selected disabled>Job Type</option>
 									<c:forEach var="jt" items="${jobTypes}">
-                                	<option value="${jt.jobType}">${jt.jobType}</option>
+                                	<option value="${jt}">${jt.jobType}</option>
                                 </c:forEach>
 								</select>
 								<p class="help-block text-danger"></p>
@@ -194,7 +207,7 @@
                     
                     <div class="col-lg-8 ">
                         <div class="modal-body">
-                            <h2>Salary <a id="sal-btn" data-toggle="collapse" data-target="#salInfo"><span><i class="toggle-icon fa fa-chevron-down"></i></span></a></h2>
+                            <h2>Salary <a id="sal-btn" data-toggle="collapse" data-target="#salInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	
                      <br>
                      <div class="collapse" id="salInfo">
@@ -228,7 +241,7 @@
            
     <br><br><br>                
 	<c:if test="${not empty result}">
- 	<div class="container" style="padding:none;display:none" id="searchResults">
+ 	<div class="container"  id="searchResults">
             <div class="row">
                 <div class="modal-body">
                    <h3>Search Results </h3>
@@ -244,31 +257,36 @@
             		</tr>
  			</thead>
         	<tbody>
+        	<c:forEach var="item" items="${result}">
         		<tr>
-					<td>1</td>
-					<td>ABC</td>
-					<td>123</td>
-					<td><button class="btn btn-info">View Details</button></td>        	
+					<td>${item.registrationId}</td>
+					<td>${item.name}</td>
+					<td>${item.contactNumber}</td>
+					<td><button type="button" class="btn btn-info" onclick="getData(${item.registrationId});">View Details</button></td>        	
         		</tr>
-        		<tr>
-					<td>2</td>
-					<td>ABC</td>
-					<td>123</td>
-					<td><button class="btn btn-info">View Details</button></td>        	
-        		</tr>
-        		<tr>
-					<td>3</td>
-					<td>ABC</td>
-					<td>123</td>
-					<td><button class="btn btn-info">View Details</button></td>        	
-        		</tr>
+      		</c:forEach>
         	</tbody>    
-            
             </table>
- 
         	</div>
    </div>
 	</c:if>
+	
+	
+	<div class="portfolio-modal modal fade" id="viewModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <h4 id="regId"></h4>
+            <div class="close-modal" data-dismiss="modal">
+                
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <br>
+			<div id="content">
+	        </div>
+    </div>
+    </div>
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
     <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
         <a class="btn btn-primary" href="#page-top">
@@ -295,18 +313,11 @@
     <script src="/static/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="/static/js/freelancer.min.js"></script>
+    <script src="/static/js/freelancer.js"></script>
     <script src="/static/js/collapse.js"></script>
     <script src="/static/js/menu.js"></script>
     <script src="/static/js/search.js"></script>
 
-<script type="text/javascript">
-    $(function () {
-        $('.multiSelect').multiselect({
-            includeSelectAllOption: true
-        });
-    });
-</script>
 </body>
 
 </html>

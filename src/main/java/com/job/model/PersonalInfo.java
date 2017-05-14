@@ -3,6 +3,7 @@ package com.job.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,11 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.job.constants.Caste;
 import com.job.constants.JobTypes;
@@ -35,6 +38,9 @@ public class PersonalInfo extends BaseEntity{
 	
 	@Column(name="gender",nullable=false)
 	private String gender;
+	
+	@Column(name="email")
+	private String email;
 	
 	@Column(name="dob",nullable=false)
 	private LocalDate dob;
@@ -68,28 +74,30 @@ public class PersonalInfo extends BaseEntity{
 	private String idNumber;
 	
 	@Column(name="total_exp")
-	private String totalExperience;
+	private Integer totalExperience = 0;
 	
 	@Column(name="exp_salary")
-	private String expectedSalary;
+	private Integer expectedSalary = 0;
 	
-	@OneToOne
+	@Column(name="curr_salary")
+	private Integer currentSalary = 0;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="permanent_address",referencedColumnName = "id")
 	private Address permanentAddress;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name="temp_address",referencedColumnName = "id")
     private Address temporaryAddress;
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="reg_id")
 	private List<WorkExperience> workExp;
 	
-	@OneToMany
-	@JoinColumn(name="reg_id")
-	private List<WorkExperience> training;
-	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
+	@Fetch(FetchMode.SELECT)
 	private List<Qualifications> qualifications;
 	
 	@Column(name="computer_skill")
@@ -99,7 +107,8 @@ public class PersonalInfo extends BaseEntity{
 	@Enumerated(EnumType.STRING)
 	private JobTypes jobRequirement;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
+	@Fetch(FetchMode.SELECT)
 	private JobPreferance preferance;
 
 	public Long getRegistrationId() {
@@ -230,14 +239,6 @@ public class PersonalInfo extends BaseEntity{
 		this.workExp = workExp;
 	}
 
-	public List<WorkExperience> getTraining() {
-		return training;
-	}
-
-	public void setTraining(List<WorkExperience> training) {
-		this.training = training;
-	}
-
 	public List<Qualifications> getQualifications() {
 		return qualifications;
 	}
@@ -270,19 +271,47 @@ public class PersonalInfo extends BaseEntity{
 		this.preferance = preferance;
 	}
 	
-	public String getTotalExperience() {
+	public Integer getTotalExperience() {
 		return totalExperience;
 	}
 
-	public void setTotalExperience(String totalExperience) {
+	public void setTotalExperience(Integer totalExperience) {
 		this.totalExperience = totalExperience;
 	}
 	
-	public String getExpectedSalary() {
+	public Integer getExpectedSalary() {
 		return expectedSalary;
 	}
 
-	public void setExpectedSalary(String expectedSalary) {
+	public void setExpectedSalary(Integer expectedSalary) {
 		this.expectedSalary = expectedSalary;
+	}
+
+	public Integer getCurrentSalary() {
+		return currentSalary;
+	}
+
+	public void setCurrentSalary(Integer currentSalary) {
+		this.currentSalary = currentSalary;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "PersonalInfo [registrationId=" + registrationId + ", name=" + name + ", gender=" + gender + ", email="
+				+ email + ", dob=" + dob + ", maritalStatus=" + maritalStatus + ", spouseName=" + spouseName
+				+ ", fatherName=" + fatherName + ", motherName=" + motherName + ", caste=" + caste + ", contactNumber="
+				+ contactNumber + ", contactNumber2=" + contactNumber2 + ", idType=" + idType + ", idNumber=" + idNumber
+				+ ", totalExperience=" + totalExperience + ", expectedSalary=" + expectedSalary + ", currentSalary="
+				+ currentSalary + ", permanentAddress=" + permanentAddress + ", temporaryAddress=" + temporaryAddress
+				+ ", workExp=" + workExp + ", qualifications=" + qualifications + ", computerSkill=" + computerSkill
+				+ ", jobRequirement=" + jobRequirement + ", preferance=" + preferance + "]";
 	}
 }

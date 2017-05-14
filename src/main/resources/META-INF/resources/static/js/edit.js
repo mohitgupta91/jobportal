@@ -27,7 +27,7 @@ $(document).ready(function(){
         $("#trainingInfo").collapse('toggle'); // toggle collapse
       });
 
-    $('.date').datepicker({dateFormat:"yyyy-mm-dd"});
+    $('.datepicker').datepicker();
     
     $('.state').change(function(){
     	var state = $(this).val();
@@ -50,16 +50,33 @@ $(document).ready(function(){
     	});
     });
     
-    $("#addBtn").click(function(){
-  		json = $("#addForm").serializeJSON();
+    $("#editForm").validate({
+  	    // Specify validation rules
+  	    rules: {
+  	      "personalInfo[name]": "required",
+  	      "personalInfo[fatherName]": "required",
+  	      "personalInfo[motherName]":"required",
+  	      "personalInfo[email]": {
+  	        required: true,
+  	        email: true
+  	      }
+  	      
+  	    },
+  	    // Specify validation error messages
+  	    messages: {
+  	    	"personalInfo[name]": "Please enter your Name",
+  	    	"personalInfo[fatherName]": "Please enter your Father's name",
+  	     	"personalInfo[email]": "Please enter a valid email address"
+  	    },
+  	  submitHandler: function() {
+  		json = $("#editForm").serializeJSON();
   		$.ajax({
-  			   url: 'http://localhost:8080/register/add',
+  			   url: 'http://localhost:8080/register/edit',
   			   type : 'POST',
   			   dataType : 'json',
   			   contentType : 'application/json',
   			   data: json ,
   			  success: function(data) {
-//  				 window.location.reloadPage(); 
   			     $('#notification-bar').text(data);
   		         $('#notification-bar').attr('class','alert fade in alert-success');
   		         $('#notification-bar').show();
@@ -70,13 +87,13 @@ $(document).ready(function(){
   		         $('#notification-bar').show();
   		      }
   			   });
+  	  }
   	});
-    
 });
 
-var qual = 1;
-var wex = 1;
-var tr = 1;
+var qual = $("#qualIndex").val();
+var tr = $("#trIndex").val();
+var wex = $("#wexIndex").val();
 
 function addQualification() {
 	var div = $("#qual"+qual).clone(true,true);
@@ -91,12 +108,13 @@ function addQualification() {
 		$("#qualDelbtn").show();
 	else
 		$("#qualDelbtn").hide();
+	
+	
 }
 
 
 
 function addWorkExp(){
-//	$('.date').datepicker("destroy");	
 	var div = $("#wexp"+wex).clone(true,true);
 	div.attr('id', 'wexp'+ ++wex);
 	div.find('label').first().html('Job '+wex);
@@ -104,15 +122,13 @@ function addWorkExp(){
 	div.find("input:text").val("");
 	div.find("input:text").removeClass('floating-label-form-group-with-value');
 	div.find("div").removeClass('floating-label-form-group-with-value');
-	div.find("input:text")
-	div.find(".date").removeClass('hasDatepicker').datepicker();
+	
 	div.find('#fromDate'+(wex-1)).attr('id','fromDate'+wex);
 	div.find('#toDate'+(wex-1)).attr('id','toDate'+wex);
+//	div.find(".datepicker").datepicker();
 	
 	$("#wexp"+(wex-1)).after(div);
 
-	$('.date').datepicker();
-    
 	if(wex > 1)
 		$("#wexpDelbtn").show();
 	else
@@ -145,7 +161,7 @@ function addTraining(){
 }
 
 function removeWorkExp(){
-	$("#wex"+wex).remove();
+	$("#wexp"+wex).remove();
 	--wex;
 	if(wex > 1)
 		$("#wexpDelbtn").show();
@@ -171,4 +187,3 @@ function removeQualification(){
 	else
 		$("#qualDelbtn").hide();
 }
-

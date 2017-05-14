@@ -2,6 +2,8 @@ package com.job.dto;
 
 public class QualificationDto {
 
+	private Long id;
+	
 	private String degree;
 	
 	private String college;
@@ -60,6 +62,14 @@ public class QualificationDto {
 
 	public void setSubjects(String subjects) {
 		this.subjects = subjects;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

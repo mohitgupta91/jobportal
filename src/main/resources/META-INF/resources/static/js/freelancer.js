@@ -22,7 +22,7 @@
     $('.navbar-collapse ul li a').click(function(){ 
             $('.navbar-toggle:visible').click();
     });
-
+    
     // Offset for Main Navigation
     $('#mainNav').affix({
         offset: {

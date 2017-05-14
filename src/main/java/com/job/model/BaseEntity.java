@@ -12,6 +12,8 @@ import javax.persistence.PrePersist;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class BaseEntity {
@@ -23,6 +25,7 @@ public abstract class BaseEntity {
 	private LocalDateTime updated;
 
 	@OneToOne
+	@JsonIgnore
 	private WebUser modifiedBy;
 
 	public LocalDateTime getCreated() {

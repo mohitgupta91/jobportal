@@ -2,9 +2,9 @@ package com.job.dto;
 
 public class AddressDto {
 
+	private Long id;
+	
 	private String address;
-
-	private String address2;
 
 	private String city;
 
@@ -18,14 +18,6 @@ public class AddressDto {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getAddress2() {
-		return address2;
-	}
-
-	public void setAddress2(String address2) {
-		this.address2 = address2;
 	}
 
 	public String getCity() {
@@ -50,5 +42,13 @@ public class AddressDto {
 
 	public void setTehsil(String tehsil) {
 		this.tehsil = tehsil;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

@@ -1,5 +1,5 @@
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
- 
+ <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
     <!-- Navigation -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
         <div class="container">
@@ -23,13 +23,17 @@
                     <li>
                         <a href="<c:url value="/register"/>" >Register</a>
                     </li>
-                    <li>
+                    <security:authorize access="hasAnyRole('ROLE_ADMIN')">
+				    <li>
                         <a href="<c:url value="/view"/>">View</a>
                     </li>
+                    </security:authorize>
                     <li class="dropdown">
     					<a href="javascript:void(0)" class="dropbtn" onclick="myFunction()">Settings</a>
     						<div class="dropdown-content" id="myDropdown">
+    						<security:authorize access="hasAnyRole('ROLE_ADMIN')">
 						      <a href="<c:url value="/user"/>" >Users</a>
+						     </security:authorize>
 						      <a href="#passwdModal" class="portfolio-link" data-toggle="modal">Change Password</a>
 						      <a href="<c:url value="/logout"/>">Logout</a>
 						    </div>

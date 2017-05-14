@@ -12,9 +12,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.job.cache.StateCityCache;
 import com.job.constants.Caste;
+import com.job.constants.Constants;
 import com.job.constants.JobTypes;
 import com.job.dto.AddEditDto;
 import com.job.service.RegistrationService;
@@ -34,12 +36,12 @@ public class RegistrationController {
 	public String registerHome(ModelMap map)
 	{
 		List<String> cityList = new ArrayList<>();
-		for(String key : stateCityCache.getCache().keySet())
-			cityList.addAll(stateCityCache.getCache().get(key));
+		stateCityCache.getCache().keySet().forEach( key -> cityList.addAll(stateCityCache.getCache().get(key)));
 		Collections.sort(cityList);
 		map.put("title","Register");
 		map.put("states", stateCityCache.getCache().keySet());
 		map.put("cities", cityList);
+		map.put("degree", Constants.degree);
 		map.put("castes", Arrays.asList(Caste.values()));
 		map.put("jobTypes", Arrays.asList(JobTypes.values()));
 		return "add";
@@ -48,6 +50,31 @@ public class RegistrationController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String addInfo(@RequestBody AddEditDto data, ModelMap map) {
 		ResponseSRO response = regService.addJobSeeker(data);
+		map.put("type", response.getError() ? "danger" : "success");
+		map.put("message", response.getMessage());
+		
+		return "add";
+	}
+	
+	@RequestMapping("/edit/home")
+	public String editHome(@RequestParam("id") Long id,ModelMap map)
+	{
+		List<String> cityList = new ArrayList<>();
+		stateCityCache.getCache().keySet().forEach( key -> cityList.addAll(stateCityCache.getCache().get(key)));
+		Collections.sort(cityList);
+		map.put("title","Edit");
+		map.put("states", stateCityCache.getCache().keySet());
+		map.put("cities", cityList);
+		map.put("degree", Constants.degree);
+		map.put("castes", Arrays.asList(Caste.values()));
+		map.put("jobTypes", Arrays.asList(JobTypes.values()));
+		map.put("data", regService.getJobSeeker(id));
+		return "edit";
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String editInfo(@RequestBody AddEditDto data, ModelMap map) {
+		ResponseSRO response = regService.editJobSeeker(data);
 		map.put("type", response.getError() ? "danger" : "success");
 		map.put("message", response.getMessage());
 		

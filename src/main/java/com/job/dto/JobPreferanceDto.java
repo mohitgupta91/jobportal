@@ -2,6 +2,8 @@ package com.job.dto;
 
 public class JobPreferanceDto {
 
+	private Long id;
+	
 	private String location1;
 
 	private String location2;
@@ -50,5 +52,13 @@ public class JobPreferanceDto {
 
 	public void setShift(String shift) {
 		this.shift = shift;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

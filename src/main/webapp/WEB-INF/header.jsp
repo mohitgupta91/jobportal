@@ -18,6 +18,7 @@
 				${message}
 		</div>
 	</c:if>
-	<div id="notification-bar" class="alert fade in" style="display:none">
+	<div id="notification" class="alert fade in" style="display:none;" >
 		<a href="#" class="close" data-dismiss="alert">&times;</a>
+		<span id="notification-msg"></span>
 	</div>

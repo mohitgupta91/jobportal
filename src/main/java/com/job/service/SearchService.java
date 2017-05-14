@@ -8,4 +8,5 @@ import com.job.model.PersonalInfo;
 public interface SearchService {
 
 	List<PersonalInfo> search(SearchDto dto);
+	PersonalInfo searchByID(String regId);
 }

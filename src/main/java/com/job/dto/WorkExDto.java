@@ -2,6 +2,8 @@ package com.job.dto;
 
 public class WorkExDto {
 
+	private Long id;
+	
 	private String jobTitle;
 
 	private String company;
@@ -50,6 +52,14 @@ public class WorkExDto {
 
 	public void setAddress(AddressDto address) {
 		this.address = address;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

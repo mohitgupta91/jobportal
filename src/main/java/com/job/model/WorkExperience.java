@@ -2,6 +2,7 @@ package com.job.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,8 +32,11 @@ public class WorkExperience extends BaseEntity{
 
 	@Column(name = "todate")
 	private LocalDate toDate;
+	
+	@Column(name = "training")
+	private Boolean training;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="address",referencedColumnName = "id")
 	private Address address;
 
@@ -82,6 +86,20 @@ public class WorkExperience extends BaseEntity{
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public Boolean getTraining() {
+		return training;
+	}
+
+	public void setTraining(Boolean training) {
+		this.training = training;
+	}
+
+	@Override
+	public String toString() {
+		return "WorkExperience [id=" + id + ", jobTitle=" + jobTitle + ", company=" + company + ", fromDate=" + fromDate
+				+ ", toDate=" + toDate + ", training=" + training + ", address=" + address + "]";
 	}
 
 }

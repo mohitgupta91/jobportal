@@ -56,34 +56,35 @@
             		</tr>
  			</thead>
         	<tbody>
-        		<tr>
-					<td>1</td>
-					<td>ABC</td>
-					<td>23</td>
-					<td>123</td>
-					<td><button class="btn btn-info">View Details</button></td>        	
-        		</tr>
-        		<tr>
-					<td>2</td>
-					<td>ABC</td>
-					<td>23</td>
-					<td>123</td>
-					<td><button class="btn btn-info">View Details</button></td>        	
-        		</tr>
-        		<tr>
-					<td>3</td>
-					<td>ABC</td>
-					<td>23</td>
-					<td>123</td>
-					<td><button class="btn btn-info">View Details</button></td>        	
-        		</tr>
+        			<c:forEach var="item" items="${data}">
+						<tr>
+						<td>${item.registrationId}</td>
+						<td>${item.name}</td>
+						<td>${item.expectedSalary}</td>
+						<td>${item.contactNumber}</td>
+						<td><button type="button" class="btn btn-info" onclick="getDetails(${item.registrationId})">View Details</button></td>
+						</tr>
+					</c:forEach>        	
         	</tbody>    
-            
             </table>
  
         	</div>
    </div>
-
+ <div class="portfolio-modal modal fade" id="viewModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <h4 id="regId"></h4>
+            <div class="close-modal" data-dismiss="modal">
+                
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <br>
+			<div id="content">
+	        </div>
+	    </div>
+    </div>
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
     <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
         <a class="btn btn-primary" href="#page-top">
@@ -106,8 +107,9 @@
     <!-- Contact Form JavaScript -->
     <script src="static/js/jqBootstrapValidation.js"></script>
     <script src="static/js/contact_me.js"></script>
-    <script src="static/js/freelancer.min.js"></script>
+    <script src="static/js/freelancer.js"></script>
 	<script src="static/js/menu.js"></script>
+	<script src="static/js/view.js"></script>
 	
     
 </body>

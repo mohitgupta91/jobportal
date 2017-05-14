@@ -14,7 +14,7 @@ public class SearchDto {
 	private List<String> qualifications;
 	private Integer minExp;
 	private Integer maxExp;
-	private List<String> jobTypes;
+	private String jobType;
 	private Integer minSal;
 	private Integer maxSal;
 	
@@ -98,12 +98,12 @@ public class SearchDto {
 		this.maxExp = maxExp;
 	}
 
-	public List<String> getJobTypes() {
-		return jobTypes;
+	public String getJobType() {
+		return jobType;
 	}
 
-	public void setJobTypes(List<String> jobTypes) {
-		this.jobTypes = jobTypes;
+	public void setJobType(String jobType) {
+		this.jobType = jobType;
 	}
 
 	public Integer getMinSal() {
@@ -126,7 +126,7 @@ public class SearchDto {
 	public String toString() {
 		return "SearchDto [minAge=" + minAge + ", maxAge=" + maxAge + ", state=" + state + ", city=" + city
 				+ ", gender=" + gender + ", caste=" + caste + ", maritalStatus=" + maritalStatus + ", qualifications="
-				+ qualifications + ", minExp=" + minExp + ", maxExp=" + maxExp + ", jobTypes=" + jobTypes + ", minSal="
+				+ qualifications + ", minExp=" + minExp + ", maxExp=" + maxExp + ", jobType=" + jobType + ", minSal="
 				+ minSal + ", maxSal=" + maxSal + "]";
 	}
 

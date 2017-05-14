@@ -22,26 +22,6 @@ public class AddEditDto {
 	
 	private JobPreferanceDto jobPreferance;
 
-	private String currentSalary;
-	
-	private String expectedSalary;
-	
-	public String getCurrentSalary() {
-		return currentSalary;
-	}
-
-	public void setCurrentSalary(String currentSalary) {
-		this.currentSalary = currentSalary;
-	}
-
-	public String getExpectedSalary() {
-		return expectedSalary;
-	}
-
-	public void setExpectedSalary(String expectedSalary) {
-		this.expectedSalary = expectedSalary;
-	}
-
 	public PersonalInfoDto getPersonalInfo() {
 		return personalInfo;
 	}
@@ -58,11 +38,11 @@ public class AddEditDto {
 		this.permamentAddress = permamentAddress;
 	}
 
-	public AddressDto getTempAddress() {
+	public AddressDto getTemporaryAddress() {
 		return temporaryAddress;
 	}
 
-	public void setTempAddress(AddressDto temporaryAddress) {
+	public void setTemporaryAddress(AddressDto temporaryAddress) {
 		this.temporaryAddress = temporaryAddress;
 	}
 
@@ -119,8 +99,7 @@ public class AddEditDto {
 		return "AddEditDto [personalInfo=" + personalInfo + ", permamentAddress=" + permamentAddress
 				+ ", temporaryAddress=" + temporaryAddress + ", qualifications=" + qualifications + ", workExperience="
 				+ workExperience + ", training=" + training + ", jobType=" + jobType + ", computerSkill="
-				+ computerSkill + ", jobPreferance=" + jobPreferance + ", currentSalary=" + currentSalary
-				+ ", expectedSalary=" + expectedSalary + "]";
+				+ computerSkill + ", jobPreferance=" + jobPreferance +"]";
 	}
 	
 	

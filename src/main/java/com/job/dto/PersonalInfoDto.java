@@ -1,14 +1,16 @@
 package com.job.dto;
 
-import java.time.LocalDate;
-
 public class PersonalInfoDto {
 
+	private Long registrationId;
+	
 	private String name;
 
 	private String gender;
-
-	private LocalDate dob;
+	
+	private String email;
+	
+	private String dob;
 
 	private String maritalStatus;
 
@@ -28,6 +30,32 @@ public class PersonalInfoDto {
 
 	private String idNumber;
 
+	private Boolean computerSkill;
+
+	private String currentSalary;
+	
+	private String expectedSalary;
+	
+	private Integer expYears = 0;
+	
+	private Integer expMonths = 0;
+	
+	public String getCurrentSalary() {
+		return currentSalary;
+	}
+
+	public void setCurrentSalary(String currentSalary) {
+		this.currentSalary = currentSalary;
+	}
+
+	public String getExpectedSalary() {
+		return expectedSalary;
+	}
+
+	public void setExpectedSalary(String expectedSalary) {
+		this.expectedSalary = expectedSalary;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -44,11 +72,11 @@ public class PersonalInfoDto {
 		this.gender = gender;
 	}
 
-	public LocalDate getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(LocalDate dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
@@ -122,5 +150,45 @@ public class PersonalInfoDto {
 
 	public void setIdNumber(String idNumber) {
 		this.idNumber = idNumber;
+	}
+
+	public Boolean getComputerSkill() {
+		return computerSkill;
+	}
+
+	public void setComputerSkill(Boolean computerSkill) {
+		this.computerSkill = computerSkill;
+	}
+
+	public Integer getExpYears() {
+		return expYears;
+	}
+
+	public void setExpYears(Integer expYears) {
+		this.expYears = expYears;
+	}
+
+	public Integer getExpMonths() {
+		return expMonths;
+	}
+
+	public void setExpMonths(Integer expMonths) {
+		this.expMonths = expMonths;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Long getRegistrationId() {
+		return registrationId;
+	}
+
+	public void setRegistrationId(Long registrationId) {
+		this.registrationId = registrationId;
 	}
 }
