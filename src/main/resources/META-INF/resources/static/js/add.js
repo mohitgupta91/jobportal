@@ -27,7 +27,7 @@ $(document).ready(function(){
         $("#trainingInfo").collapse('toggle'); // toggle collapse
       });
 
-    $('.date').datepicker({dateFormat:"yyyy-mm-dd"});
+    initializeDatepicker();
     
     $('.state').change(function(){
     	var state = $(this).val();
@@ -43,9 +43,10 @@ $(document).ready(function(){
     				city.append("<option value="+data[i]+">"+data[i]+"</option>")
     		  },
     		  error: function() {
-    			  	 $('#notification-bar').show();
-    		         $('#notification-bar').text('An error occurred');
-    		         $('#notification-bar').attr('class','alert fade in alert-danger');
+    			  	 $('#notification').show();
+    			  	$('#notification').focus();
+    		         $('#notification-msg').text('An error occurred');
+    		         $('#notification').attr('class','alert fade in alert-danger');
     		  }
     	});
     });
@@ -59,15 +60,12 @@ $(document).ready(function(){
   			   contentType : 'application/json',
   			   data: json ,
   			  success: function(data) {
-//  				 window.location.reloadPage(); 
-  			     $('#notification-bar').text(data);
-  		         $('#notification-bar').attr('class','alert fade in alert-success');
-  		         $('#notification-bar').show();
+  				 window.location="http://localhost:8080/register?id="+data;
   		         },
-  			  error: function() {
-  			     $('#notification-bar').text(data);
-  		         $('#notification-bar').attr('class','alert fade in alert-success');
-  		         $('#notification-bar').show();
+  			  error: function(data) {
+  			     $('#notification-msg').text("Error occured please contact Admin or Fill the form properly");
+  		         $('#notification').attr('class','alert fade in alert-danger');
+  		         $('#notification').show();
   		      }
   			   });
   	});
@@ -96,7 +94,7 @@ function addQualification() {
 
 
 function addWorkExp(){
-//	$('.date').datepicker("destroy");	
+	$('.date').datepicker("destroy");	
 	var div = $("#wexp"+wex).clone(true,true);
 	div.attr('id', 'wexp'+ ++wex);
 	div.find('label').first().html('Job '+wex);
@@ -105,14 +103,12 @@ function addWorkExp(){
 	div.find("input:text").removeClass('floating-label-form-group-with-value');
 	div.find("div").removeClass('floating-label-form-group-with-value');
 	div.find("input:text")
-	div.find(".date").removeClass('hasDatepicker').datepicker();
 	div.find('#fromDate'+(wex-1)).attr('id','fromDate'+wex);
 	div.find('#toDate'+(wex-1)).attr('id','toDate'+wex);
 	
 	$("#wexp"+(wex-1)).after(div);
 
-	$('.date').datepicker();
-    
+	initializeDatepicker();    
 	if(wex > 1)
 		$("#wexpDelbtn").show();
 	else
@@ -122,6 +118,7 @@ function addWorkExp(){
 
 
 function addTraining(){
+	$('.date').datepicker("destroy");	
 	var div = $("#train"+tr).clone(true,true);
 	div.attr('id', 'train'+ ++tr);
 	div.find('label').first().html('Training '+tr);
@@ -132,8 +129,7 @@ function addTraining(){
 	
 	div.find('#trfromDate'+(tr-1)).attr('id','trfromDate'+tr);
 	div.find('#trtoDate'+(tr-1)).attr('id','trtoDate'+tr);
-//	div.find(".datepicker").datepicker();
-	
+	initializeDatePicker();	
 
 	
 	$("#train"+(tr-1)).after(div);
@@ -145,7 +141,7 @@ function addTraining(){
 }
 
 function removeWorkExp(){
-	$("#wex"+wex).remove();
+	$("#wexp"+wex).remove();
 	--wex;
 	if(wex > 1)
 		$("#wexpDelbtn").show();
@@ -172,3 +168,12 @@ function removeQualification(){
 		$("#qualDelbtn").hide();
 }
 
+function initializeDatepicker() {
+    $('.date').datepicker({
+    	dateFormat:"yy-mm-dd",
+    	changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        yearRange: '1950:2017'
+        });
+}

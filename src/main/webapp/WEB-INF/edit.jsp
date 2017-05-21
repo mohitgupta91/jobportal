@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
 <head>
 
     <meta charset="utf-8">
@@ -22,7 +22,7 @@
     <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-	<link href="/static/css/datepicker3.css" rel="stylesheet">
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -54,42 +54,42 @@
                    	 <div class="collapse" id="personalInfo"> 
                    	 	<div class="row control-group col-lg-offset-2">
                    	 	<input type="hidden" name="personalInfo[registrationId]" value="${data.registrationId}">
-                            <div  class="form-group col-xs-8 floating-label-form-group controls">
+                            <div  class="form-group col-xs-8 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Full Name</label>                            
                                 <input class="form-control" placeholder="Name" id="name" value="${data.name}" name="personalInfo[name]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-8 floating-label-form-group controls">
+                            <div  class="form-group col-xs-8 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Email ID</label>                            
                                 <input class="form-control" placeholder="Email Id" id="emailId" value="${data.email}" name="personalInfo[email]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
-                        <div class="row control-group col-lg-offset-2 input-group date">
+                        <div class="row control-group col-lg-offset-2 ">
 <!-- 							<div class="input-group-addon"><i class="fa fa-calendar"></i></div> -->
-                  			<div  class="form-group col-xs-12 floating-label-form-group controls">
+                  			<div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Date Of Birth</label>                            
-                                <input class="form-control pull-right datepicker"  value="${data.dob}" type="text" placeholder="Date Of Birth" id="dob" name="personalInfo[dob]" >
+                                <input class="form-control pull-right date"  value="${data.dob}" type="text" placeholder="Date Of Birth" id="dob" name="personalInfo[dob]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <br>
                         <div class="row control-group col-lg-offset-2">
-                        	<div  class="form-group col-xs-6 floating-label-form-group controls">
+                        	<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Father's Name</label>                            
                                 <input class="form-control" placeholder="Father's Name" id="fatherName" value="${data.fatherName}" name="personalInfo[fatherName]" >
                                 <p class="help-block text-danger"></p>
                             </div>
-                           	<div  class="form-group col-xs-6 floating-label-form-group controls">
+                           	<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Mother's Name</label>                            
                                 <input class="form-control" placeholder="Mother's Name" id="motherName" value="${data.motherName}" name="personalInfo[motherName]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>    
                         <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-4 floating-label-form-group controls">
+                            <div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
                               <label >Gender</label>
                                 <select class="form-control col-xs-4 " id="gender" name="personalInfo[gender]" >
                                	 	<c:choose>
@@ -117,7 +117,7 @@
                                 		</c:choose>
                                 </select>
                             </div>
-                            <div  class="form-group col-xs-4 floating-label-form-group controls">
+                            <div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
                             	<label>Caste</label>
                                 	<select class="form-control col-xs-4"  id="caste" name="personalInfo[caste]" >
                                 	 <c:forEach var="caste" items="${castes}">
@@ -137,7 +137,7 @@
                       <br><br>
                         <div class="row control-group col-lg-offset-2">
                             <br>
-                        	<div  class="form-group col-xs-4 floating-label-form-group controls">
+                        	<div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
                             	<label>Marital Status</label>
                                 <select class="form-control col-xs-4"  id="maritalStatus" name="personalInfo[maritalStatus]" >
                        	    	    <c:choose>
@@ -159,7 +159,7 @@
                                 	
                                 </select>
                             </div>
-                        	<div  class="form-group col-xs-4 floating-label-form-group controls">
+                        	<div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
                             	<label>Spouse's Name</label>                            
                                 <input class="form-control" placeholder="Spouse's Name" id="spouseName" value="${spouseName}" name="personalInfo[spouseName]" >
 <!--                                 <p class="help-block text-danger"></p> -->
@@ -168,7 +168,7 @@
                         
                         <div class="row control-group col-lg-offset-2">
                             <br>
-                        	<div  class="form-group col-xs-4 floating-label-form-group controls">
+                        	<div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
                             	<label>ID Type</label>
                                 <select class="form-control col-xs-4"  id="idType" name="personalInfo[idType]" >
                        	    	    <option selected value="${data.idType}">${data.idType}</option>
@@ -178,19 +178,19 @@
                        	    	    <option value="pan">PAN Card</option>
                                 </select>
                             </div>
-                        	<div  class="form-group col-xs-4 floating-label-form-group controls">
+                        	<div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
                             	<label>ID Number</label>                            
                                 <input class="form-control" placeholder="ID Number" id="idNumber" value="${data.idNumber}" name="personalInfo[idNumber]" >
                            </div>
                         </div>
           				<br>
           				<div class="row control-group col-lg-offset-2">
-                        	<div  class="form-group col-xs-6 floating-label-form-group controls">
+                        	<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Contact Number</label>                            
                                 <input class="form-control" placeholder="Contact Number" id="contactNumber1" value="${data.contactNumber}" name="personalInfo[contactNumber]" >
                                 <p class="help-block text-danger"></p>
                             </div>
-                           	<div  class="form-group col-xs-6 floating-label-form-group controls">
+                           	<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Other Number</label>                            
                                 <input class="form-control" placeholder="Other Number" id="otherNumber" value="${data.contactNumber2}" name="personalInfo[contactNumber2]" >
                                 <p class="help-block text-danger"></p>
@@ -201,12 +201,13 @@
                         	<label>Total Experience</label>
                         </div>
                         <div class="row control-group col-lg-offset-2">
-                        	<div  class="form-group col-xs-6 floating-label-form-group controls">
+                        	<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Year</label>                            
-                                <input class="form-control" placeholder="Years" id="expYears" value="${data.totalExperience div 12}"name="personalInfo[expYear]" >
+                                <input class="form-control" placeholder="Years" id="expYears" value="<fmt:parseNumber var="intValue" integerOnly="true" 
+                       type="number" value="${data.totalExperience/12}" />"name="personalInfo[expYears]" >
                                 <p class="help-block text-danger"></p>
                             </div>
-                           	<div  class="form-group col-xs-6 floating-label-form-group controls">
+                           	<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Months</label>                            
                                 <input class="form-control" placeholder="Months" id="expMonths" value="${data.totalExperience%12}" name="personalInfo[expMonths]" >
                                 <p class="help-block text-danger"></p>
@@ -231,18 +232,18 @@
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
                      <br>
-                      <input type="hidden" value="${data.permanentAddress.id}" name="permanentAddress[id]">
+                      <input type="hidden" value="${data.permanentAddress.id}" name="permamentAddress[id]">
                       <div class="collapse" id="addInfo"> 
                        <div class="row control-group col-lg-offset-2">
                             <label>Permanent Address</label>
                             <br>
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+                            <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Address</label> 
 								<input class="form-control" placeholder="Address" id="address" value="${data.permanentAddress.address}" name="permamentAddress[address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
 									id="state" name="permamentAddress[state]">
 									<c:forEach var="state" items="${states}">
@@ -257,7 +258,7 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group col-xs-6 floating-label-form-group controls">
+							<div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
 									id="city" name="permamentAddress[city]">
 									<option selected value="${data.permanentAddress.city}">${data.permanentAddress.city}</option>
@@ -265,7 +266,7 @@
 							</div>
 						</div>   
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Tehsil/Taluka</label> 
 								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" value="${data.permanentAddress.tehsil}" name="permamentAddress[tehsil]" >
 							</div>
@@ -277,13 +278,13 @@
                             <label>Temporary Address</label>
                             <br>
                             <input type="hidden" value="${data.temporaryAddress.id}" name="temporaryAddress[id]">
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+                            <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Address</label> 
 								<input class="form-control" placeholder="Address" id="address" value="${data.temporaryAddress.address}" name="temporaryAddress[address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
 									id="state" name="temporaryAddress[state]">
 									<c:forEach var="state" items="${states}">
@@ -298,7 +299,7 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group col-xs-6 floating-label-form-group controls">
+							<div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
 									id="city" name="temporaryAddress[city]">
 									<option selected value="${data.temporaryAddress.city}">${data.temporaryAddress.city}</option>
@@ -306,7 +307,7 @@
 							</div>
 						</div>   
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Tehsil/Taluka</label> 
 								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" value="${data.temporaryAddress.tehsil}" name="temporaryAddress[tehsil]" >
 							</div>
@@ -325,11 +326,11 @@
                      <c:forEach var="qual" items="${data.qualifications}" varStatus="loop">
                      <c:set var="qualIndex" value="${qualIndex+1}" />
                      <div id="qual${qualIndex}">
-                     <input type="hidden" value="${qual.id}" name="qualifications[][id]">                          
+                     <input type="hidden" value="${qual.id}" id="qualid" name="qualifications[][id]">                          
                      <div class="row control-group col-lg-offset-2">
                            <label>Qualification ${loop.index+1}</label>
                             <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Degree</label>                            
                                 <select class="form-control col-xs-6"
 									id="degree" name="qualifications[][degree]">
@@ -348,27 +349,27 @@
 							</div>
                          </div>
                           <div class="row control-group col-lg-offset-2">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>College</label>
                                 <input class="form-control" value="${qual.college}" placeholder="College" id="college" name="qualifications[][college]" >
                             </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>University</label>
                                 <input class="form-control" placeholder="University" value="${qual.university}" id="university" name="qualifications[][university]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Grade</label>
                                 <input class="form-control" placeholder="Grade" id="grade" value="${qual.grade}" name="qualifications[][grade]" >
                             </div>
-                              <div  class="form-group col-xs-12 floating-label-form-group controls">
+                              <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Year</label> 
 								<input class="form-control" placeholder="Year" id="year" value="${qual.passYear}" name="qualifications[][passYear]" >
 							</div>
                           </div>
                           <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+                            <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Subjects</label> 
 								<input class="form-control" placeholder="Subjects" id="subjects" value="${qual.subjects}" name="qualifications[][subjects]" >
 							</div>
@@ -381,7 +382,7 @@
                      	<div class="row control-group col-lg-offset-2">
                            <label>Qualification 1</label>
                             <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Degree</label>                            
                                 <select class="form-control col-xs-6"
 									id="degree" name="qualifications[][degree]">
@@ -393,27 +394,27 @@
 							</div>
                          </div>
                           <div class="row control-group col-lg-offset-2">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>College</label>
                                 <input class="form-control" placeholder="College" id="college" name="qualifications[][college]" >
                             </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>University</label>
                                 <input class="form-control" placeholder="University" id="university" name="qualifications[][university]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Grade</label>
                                 <input class="form-control" placeholder="Grade" id="grade" name="qualifications[][grade]" >
                             </div>
-                              <div  class="form-group col-xs-12 floating-label-form-group controls">
+                              <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Year</label> 
 								<input class="form-control" placeholder="Year" id="yaer" name="qualifications[][passYear]" >
 							</div>
                           </div>
                           <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+                            <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Subjects</label> 
 								<input class="form-control" placeholder="Subjects" id="subjects" name="qualifications[][subjects]" >
 							</div>
@@ -444,25 +445,25 @@
                      <div id="wexp${wexIndex}">
                      <div class="row control-group col-lg-offset-2">
                            <label>Job ${wexIndex}</label>
-                           <input type="hidden" value="${wexp.id}" name="workExperience[][id]">
+                           <input type="hidden" value="${wexp.id}" id="wexid" name="workExperience[][id]">
                             <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Job Title</label>                            
                                 <input class="form-control" placeholder="Job Title" id="jobTitle" value="${wexp.jobTitle}" name="workExperience[][jobTitle]" >
                             </div>
                          </div>
-                          <div class="row control-group col-lg-offset-2 input-group date">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                          <div class="row control-group col-lg-offset-2">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>From</label>
-                                <input class="form-control pull-right datepicker" placeholder="From Date" value="${wexp.fromDate}" id="fromDate1" name="workExperience[][fromDate]" >
+                                <input class="form-control pull-right date" placeholder="From Date" value="${wexp.fromDate}" id="fromDate1" name="workExperience[][fromDate]" >
                             </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>To</label>
-                                <input class="form-control pull-right datepicker" placeholder="To Date" id="toDate1" value="${wexp.toDate}" name="workExperience[][toDate]" >
+                                <input class="form-control pull-right date" placeholder="To Date" id="toDate1" value="${wexp.toDate}" name="workExperience[][toDate]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Company Name</label>
                                 <input class="form-control" placeholder="Company Name" id="companyName" value="${wexp.company}" name="workExperience[][company]" >
                             </div>
@@ -472,13 +473,13 @@
                             <div class="row control-group col-lg-offset-2">
                             <label>Company Address</label>
                             <br>
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+                            <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Address</label> 
 								<input class="form-control" placeholder="Address" id="address" value="${wexp.address.address}" name="workExperience[][address][address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
 									id="state" name="workExperience[][address][state]">
 									<option selected disabled>State</option>
@@ -494,7 +495,7 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group col-xs-6 floating-label-form-group controls">
+							<div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
 									id="city" name="workExperience[][address][city]">
 									<option selected value="${wexp.address.city}">${wexp.address.city}</option>
@@ -502,7 +503,7 @@
 							</div>
 						</div>   
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Tehsil/Taluka</label> 
 								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" value="${wexp.address.tehsil}" name="workExperience[][address][tehsil]" >
 							</div>
@@ -517,23 +518,23 @@
                      <div class="row control-group col-lg-offset-2">
                            <label>Job 1</label>
                             <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Job Title</label>                            
                                 <input class="form-control" placeholder="Job Title" id="jobTitle" name="workExperience[][jobTitle]" >
                             </div>
                          </div>
-                          <div class="row control-group col-lg-offset-2 input-group date">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                          <div class="row control-group col-lg-offset-2">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>From</label>
-                                <input class="form-control pull-right datepicker" placeholder="From Date" id="fromDate1" name="workExperience[][fromDate]" >
+                                <input class="form-control pull-right date" placeholder="From Date" id="fromDate1" name="workExperience[][fromDate]" >
                             </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>To</label>
-                                <input class="form-control pull-right datepicker" placeholder="To Date" id="toDate1" name="workExperience[][toDate]" >
+                                <input class="form-control pull-right date" placeholder="To Date" id="toDate1" name="workExperience[][toDate]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Company Name</label>
                                 <input class="form-control" placeholder="Company Name" id="companyName" name="workExperience[][company]" >
                             </div>
@@ -543,13 +544,13 @@
                             <div class="row control-group col-lg-offset-2">
                             <label>Company Address</label>
                             <br>
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+                            <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Address</label> 
 								<input class="form-control" placeholder="Address" id="address" name="workExperience[][address][address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
 									id="state" name="workExperience[][address][state]">
 									<option selected disabled>State</option>
@@ -558,7 +559,7 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group col-xs-6 floating-label-form-group controls">
+							<div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
 									id="city" name="workExperience[][address][city]">
 									<option selected disabled>City</option>
@@ -567,7 +568,7 @@
 							</div>
 						</div>   
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Tehsil/Taluka</label> 
 								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" name="workExperience[][address][tehsil]" >
 							</div>
@@ -602,25 +603,25 @@
                      <div class="row control-group col-lg-offset-2">
                      	
                            <label>Training ${trIndex }</label>
-                           <input type="hidden" value="${train.id}" name="training[][id]">
+                           <input type="hidden" value="${train.id}" id="trid" name="training[][id]">
                             <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Job Title</label>                            
                                 <input class="form-control" placeholder="Job Title" id="jobTitle" value="${train.jobTitle}" name="training[][jobTitle]" >
                             </div>
                          </div>
-                          <div class="row control-group col-lg-offset-2 input-group date">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                          <div class="row control-group col-lg-offset-2 ">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>From</label>
-                                <input class="form-control pull-right datepicker" placeholder="From Date" value="${train.fromDate}" id="trfromDate1" name="training[][fromDate]" >
+                                <input class="form-control pull-right date" placeholder="From Date" value="${train.fromDate}" id="trfromDate1" name="training[][fromDate]" >
                             </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>To</label>
-                                <input class="form-control pull-right datepicker" placeholder="To Date" value="${train.toDate}" id="trtoDate1" name="training[][toDate]" >
+                                <input class="form-control pull-right date" placeholder="To Date" value="${train.toDate}" id="trtoDate1" name="training[][toDate]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Company Name</label>
                                 <input class="form-control" placeholder="Company Name" id="companyName" value="${train.company}" name="training[][company]" >
                             </div>
@@ -630,13 +631,13 @@
                             <div class="row control-group col-lg-offset-2">
                             <label>Company Address</label>
                             <br>
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+                            <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Address</label> 
 								<input class="form-control" placeholder="Address" id="address" value="${train.address.address}" name="training[][address][address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
 									id="state" name="training[][address][state]">
 									<c:forEach var="state" items="${states}">
@@ -651,7 +652,7 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group col-xs-6 floating-label-form-group controls">
+							<div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
 									id="city" name="training[][address][city]">
 									<option selected value="${train.address.city}">${train.address.city}</option>
@@ -659,7 +660,7 @@
 							</div>
 						</div>   
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Tehsil/Taluka</label> 
 								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" value="${train.address.tehsil}" name="training[][address][tehsil]" >
 							</div>
@@ -675,23 +676,23 @@
                      	
                            <label>Training 1</label>
                             <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Job Title</label>                            
                                 <input class="form-control" placeholder="Job Title" id="jobTitle" name="training[][jobTitle]" >
                             </div>
                          </div>
-                          <div class="row control-group col-lg-offset-2 input-group date">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                          <div class="row control-group col-lg-offset-2 ">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>From</label>
-                                <input class="form-control pull-right datepicker" placeholder="From Date" id="trfromDate1" name="training[][fromDate]" >
+                                <input class="form-control pull-right date" placeholder="From Date" id="trfromDate1" name="training[][fromDate]" >
                             </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>To</label>
-                                <input class="form-control pull-right datepicker" placeholder="To Date" id="trtoDate1" name="training[][toDate]" >
+                                <input class="form-control pull-right date" placeholder="To Date" id="trtoDate1" name="training[][toDate]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Company Name</label>
                                 <input class="form-control" placeholder="Company Name" id="companyName" name="training[][company]" >
                             </div>
@@ -701,13 +702,13 @@
                             <div class="row control-group col-lg-offset-2">
                             <label>Company Address</label>
                             <br>
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+                            <div  class="form-group col-xs-12 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Address</label> 
 								<input class="form-control" placeholder="Address" id="address" name="training[][address][address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
 									id="state" name="training[][address][state]">
 									<option selected disabled>State</option>
@@ -716,7 +717,7 @@
 									</c:forEach>
 								</select>
 							</div>
-							<div class="form-group col-xs-6 floating-label-form-group controls">
+							<div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
 									id="city" name="training[][address][city]">
 									<option selected disabled>City</option>
@@ -724,7 +725,7 @@
 							</div>
 						</div>   
                        <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Tehsil/Taluka</label> 
 								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" name="training[][address][tehsil]" >
 							</div>
@@ -753,7 +754,7 @@
                      <br>
                     	<div class="collapse" id="jfInfo"> 
                            <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Type</label> 
 								<select  class="form-control col-xs-6" 	id="jobType" name="jobType">
 									<option value="">Job Type</option>
@@ -784,7 +785,7 @@
                            <div class="row control-group col-lg-offset-2">
                             <label>Location</label>
                             <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Location 1</label> 
 								<select  class="form-control col-xs-6" 	id="location1" name="jobPreferance[location1]">
 									<c:forEach var="city" items="${cities}">
@@ -799,7 +800,7 @@
                                 	</c:forEach>
 								</select>
 							</div>
-							<div  class="form-group col-xs-6 floating-label-form-group controls">
+							<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Location 2</label> 
 								<select  class="form-control col-xs-6" 	id="location2" name="jobPreferance[location2]">
 									<c:forEach var="city" items="${cities}">
@@ -814,7 +815,7 @@
                                 	</c:forEach>
 								</select>
 							</div>
-							<div  class="form-group col-xs-6 floating-label-form-group controls">
+							<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
 								<label>Location 3</label> 
 								<select  class="form-control col-xs-6" 	id="location3" name="jobPreferance[location3]">
 									<c:forEach var="city" items="${cities}">
@@ -831,7 +832,7 @@
 							</div>
 						</div><br>
 						<div class="row control-group col-lg-offset-2">
-							<div class="form-group col-xs-6 floating-label-form-group controls">
+							<div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
     						<select  class="form-control col-xs-6" 	id="shift" name="jobPreferance[shift]">
 								<option value="">Shift</option>
 								<c:if test="${data.preferance.shift == 'NIGHT' }">
@@ -872,12 +873,12 @@
                     <div class="row control-group col-lg-offset-2">
                             <label>Salary</label>
                             <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Current</label>                            
                                 <input class="form-control" placeholder="Current Salary (p.a)" id="currentSalary" value="${data.currentSalary}" name="personalInfo[currentSalary]" >
                                 <p class="help-block text-danger"></p>
                             </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls">
+                            <div class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Expected</label>
                                 <input class="form-control" placeholder="Expected Salary (p.a)" id="expectedSalary" value="${data.expectedSalary}" name="personalInfo[expectedSalary]" >
                                 <p class="help-block text-danger"></p>
@@ -915,18 +916,15 @@
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="/static/js/jqBootstrapValidation.js"></script>
-    <script src="/static/js/contact_me.js"></script>
-
+  
     <!-- Theme JavaScript -->
     <script src="/static/js/freelancer.js"></script>
     
     <script src="/static/js/menu.js"></script>
     <script src="/static/js/edit.js"></script>
     <script src="/static/js/jquery.serialize-object.min.js"></script>
-    <script src="/static/js/bootstrap-datepicker.js"></script>
-	
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </body>
 
 </html>

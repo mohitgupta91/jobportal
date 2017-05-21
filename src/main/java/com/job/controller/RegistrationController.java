@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.job.cache.StateCityCache;
 import com.job.constants.Caste;
@@ -20,7 +21,6 @@ import com.job.constants.Constants;
 import com.job.constants.JobTypes;
 import com.job.dto.AddEditDto;
 import com.job.service.RegistrationService;
-import com.job.sro.ResponseSRO;
 
 @Controller
 @RequestMapping("/register")
@@ -33,12 +33,17 @@ public class RegistrationController {
 	private RegistrationService regService;
 	
 	@RequestMapping("")
-	public String registerHome(ModelMap map)
+	public String registerHome(@RequestParam(value="id",required=false) Long id,ModelMap map)
 	{
 		List<String> cityList = new ArrayList<>();
 		stateCityCache.getCache().keySet().forEach( key -> cityList.addAll(stateCityCache.getCache().get(key)));
 		Collections.sort(cityList);
 		map.put("title","Register");
+		if(id != null)
+		{
+			map.put("message", "Successfully Added . Registeration ID :"+id);
+			map.put("type", "success");
+		}
 		map.put("states", stateCityCache.getCache().keySet());
 		map.put("cities", cityList);
 		map.put("degree", Constants.degree);
@@ -48,12 +53,10 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addInfo(@RequestBody AddEditDto data, ModelMap map) {
-		ResponseSRO response = regService.addJobSeeker(data);
-		map.put("type", response.getError() ? "danger" : "success");
-		map.put("message", response.getMessage());
+	public @ResponseBody Long addInfo(@RequestBody AddEditDto data, ModelMap map) {
+		Long response = regService.addJobSeeker(data);
 		
-		return "add";
+		return response;
 	}
 	
 	@RequestMapping("/edit/home")
@@ -73,11 +76,7 @@ public class RegistrationController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String editInfo(@RequestBody AddEditDto data, ModelMap map) {
-		ResponseSRO response = regService.editJobSeeker(data);
-		map.put("type", response.getError() ? "danger" : "success");
-		map.put("message", response.getMessage());
-		
-		return "add";
+	public @ResponseBody Long editInfo(@RequestBody AddEditDto data, ModelMap map) {
+		return regService.editJobSeeker(data);
 	}
 }

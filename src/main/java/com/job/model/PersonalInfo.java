@@ -14,8 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -25,11 +25,12 @@ import com.job.constants.JobTypes;
 
 @Entity
 @Table(name="personal_info")
+
 public class PersonalInfo extends BaseEntity{
 
 	@Id
-	@TableGenerator(name = "regGen", table = "reg_id_gen", pkColumnName = "generator", valueColumnName = "generator", initialValue=100, allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.TABLE)
+	@SequenceGenerator(name="personal_seq",initialValue=1000, allocationSize = 1)
+	@GeneratedValue(strategy=GenerationType.AUTO,generator="personal_seq" )
 	@Column(name="reg_id",nullable=false,unique=true)
 	private Long registrationId;
 	

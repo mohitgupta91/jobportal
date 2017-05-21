@@ -50,7 +50,7 @@
             		<tr style="font-size: 1.85em;">
             			<th>Reg. ID</th>
             			<th>Name</th>
-            			<th>Age</th>
+            			<th>Current Salary</th>
             			<th>Contact</th>
             			<th>Action</th>
             		</tr>
@@ -60,7 +60,7 @@
 						<tr>
 						<td>${item.registrationId}</td>
 						<td>${item.name}</td>
-						<td>${item.expectedSalary}</td>
+						<td>${item.currentSalary}</td>
 						<td>${item.contactNumber}</td>
 						<td><button type="button" class="btn btn-info" onclick="getDetails(${item.registrationId})">View Details</button></td>
 						</tr>

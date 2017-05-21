@@ -161,7 +161,7 @@
                         <div class="row control-group col-lg-offset-2">
                         	<div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Year</label>                            
-                                <input class="form-control" placeholder="Years" id="expYears" name="personalInfo[expYear]" min=0 type="number">
+                                <input class="form-control" placeholder="Years" id="expYears" name="personalInfo[expYears]" min=0 type="number">
                                 <p class="help-block text-danger"></p>
                             </div>
                            	<div  class="form-group col-xs-6 floating-label-form-group controls">
@@ -409,14 +409,14 @@
                                 <input class="form-control"  placeholder="Job Title" id="jobTitle" name="training[][jobTitle]" >
                             </div>
                          </div>
-                          <div class="row control-group col-lg-offset-2 input-group date">
+                          <div class="row control-group col-lg-offset-2">
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>From</label>
-                                <input class="form-control pull-right datepicker" placeholder="From Date" id="trfromDate1" name="training[][fromDate]" >
+                                <input class="form-control pull-right date" placeholder="From Date" id="trfromDate1" name="training[][fromDate]" >
                             </div>
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>To</label>
-                                <input class="form-control pull-right datepicker" placeholder="To Date" id="trtoDate1" name="training[][toDate]" >
+                                <input class="form-control pull-right date" placeholder="To Date" id="trtoDate1" name="training[][toDate]" >
                             </div>
                           </div> 
                           <div class="row control-group col-lg-offset-2">
@@ -603,9 +603,6 @@
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    <!-- Contact Form JavaScript -->
-    <script src="/static/js/jqBootstrapValidation.js"></script>
-    <script src="/static/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
     <script src="/static/js/freelancer.js"></script>
@@ -613,8 +610,10 @@
     <script src="/static/js/menu.js"></script>
     <script src="/static/js/add.js"></script>
     <script src="/static/js/jquery.serialize-object.min.js"></script>
-    <script src="/static/js/bootstrap-datepicker.js"></script>
 	
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </body>
 
 </html>

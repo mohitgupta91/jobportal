@@ -20,13 +20,13 @@ public class JobPreferance extends BaseEntity{
 	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "location1", nullable = true, unique = true)
+	@Column(name = "location1", nullable = true)
 	private String location1;
 
-	@Column(name = "location2", nullable = true, unique = true)
+	@Column(name = "location2", nullable = true)
 	private String location2;
 
-	@Column(name = "location3", nullable = true, unique = true)
+	@Column(name = "location3", nullable = true)
 	private String location3;
 
 	@Column

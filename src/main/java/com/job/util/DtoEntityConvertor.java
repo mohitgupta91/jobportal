@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import com.job.constants.Caste;
+import com.job.constants.Constants;
 import com.job.constants.Role;
 import com.job.constants.ShiftType;
 import com.job.dto.AddressDto;
@@ -28,7 +29,7 @@ public class DtoEntityConvertor {
 		entity.setContactNumber2(dto.getContactNumber2());
 		entity.setFatherName(dto.getFatherName());
 		entity.setEmail(dto.getEmail());
-		entity.setDob(LocalDate.parse(dto.getDob(), DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+		entity.setDob(LocalDate.parse(dto.getDob(), DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		entity.setGender(dto.getGender());
 		entity.setIdNumber(dto.getIdNumber());
 		entity.setIdType(dto.getIdType());
@@ -64,12 +65,12 @@ public class DtoEntityConvertor {
 	public static WorkExperience convertWorkExDto(WorkExDto dto, WorkExperience entity, Boolean training){
 		entity.setAddress(convertAddressDto(dto.getAddress(), new Address()));
 		entity.setCompany(dto.getCompany());
-		if(dto.getFromDate() !=null || ! dto.getFromDate().equals(""))
-			entity.setFromDate(LocalDate.parse(dto.getFromDate(),DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+		if(dto.getFromDate() !=null && !dto.getFromDate().equals(""))
+			entity.setFromDate(LocalDate.parse(dto.getFromDate(),DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		entity.setJobTitle(dto.getJobTitle());
 		entity.setTraining(training);
-		if(dto.getToDate() !=null || ! dto.getToDate().equals(""))
-			entity.setToDate(LocalDate.parse(dto.getToDate(),DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+		if(dto.getToDate() !=null && ! dto.getToDate().equals(""))
+			entity.setToDate(LocalDate.parse(dto.getToDate(),DateTimeFormatter.ofPattern(Constants.DATE_FORMAT)));
 		return entity;
 	}
 	

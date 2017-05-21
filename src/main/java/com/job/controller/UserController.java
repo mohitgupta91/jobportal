@@ -47,6 +47,7 @@ public class UserController {
 	public String addUser(@ModelAttribute WebUserDto dto, ModelMap map) {
 		userService.saveOrUpdateUser(convertWebUserDto(dto, new WebUser()));
 		map.put("title", "User Management");
+		map.put("users", userService.getUsers());
 		return "user";
 	}
 	

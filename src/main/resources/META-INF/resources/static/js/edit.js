@@ -27,7 +27,7 @@ $(document).ready(function(){
         $("#trainingInfo").collapse('toggle'); // toggle collapse
       });
 
-    $('.datepicker').datepicker();
+    initializeDatepicker();
     
     $('.state').change(function(){
     	var state = $(this).val();
@@ -43,9 +43,9 @@ $(document).ready(function(){
     				city.append("<option value="+data[i]+">"+data[i]+"</option>")
     		  },
     		  error: function() {
-    			  	 $('#notification-bar').show();
-    		         $('#notification-bar').text('An error occurred');
-    		         $('#notification-bar').attr('class','alert fade in alert-danger');
+    			  	 $('#notification').show();
+    		         $('#notification-msg').text('An error occurred');
+    		         $('#notification').attr('class','alert fade in alert-danger');
     		  }
     	});
     });
@@ -77,14 +77,12 @@ $(document).ready(function(){
   			   contentType : 'application/json',
   			   data: json ,
   			  success: function(data) {
-  			     $('#notification-bar').text(data);
-  		         $('#notification-bar').attr('class','alert fade in alert-success');
-  		         $('#notification-bar').show();
-  		         },
+  				  window.location="http://localhost:8080/view?flag"
+  			  },
   			  error: function() {
-  			     $('#notification-bar').text(data);
-  		         $('#notification-bar').attr('class','alert fade in alert-success');
-  		         $('#notification-bar').show();
+  			     $('#notification-msg').text("Please check the form");
+  		         $('#notification').attr('class','alert fade in alert-danger');
+  		         $('#notification').show();
   		      }
   			   });
   	  }
@@ -99,6 +97,7 @@ function addQualification() {
 	var div = $("#qual"+qual).clone(true,true);
 	div.attr('id', 'qual'+ ++qual);
 	div.find('label').first().html('Qualification '+qual);
+	div.find("#qualid").remove();
 	div.find("input:text").val("");
 	div.find("input:text").removeClass('floating-label-form-group-with-value');
 	div.find("div").removeClass('floating-label-form-group-with-value');
@@ -115,19 +114,20 @@ function addQualification() {
 
 
 function addWorkExp(){
+	$('.date').datepicker('destroy');
 	var div = $("#wexp"+wex).clone(true,true);
 	div.attr('id', 'wexp'+ ++wex);
 	div.find('label').first().html('Job '+wex);
 	div.find("select.city").html("<option selected disabled>City</option>");
+	div.find("#wexid").remove();
 	div.find("input:text").val("");
 	div.find("input:text").removeClass('floating-label-form-group-with-value');
 	div.find("div").removeClass('floating-label-form-group-with-value');
 	
 	div.find('#fromDate'+(wex-1)).attr('id','fromDate'+wex);
 	div.find('#toDate'+(wex-1)).attr('id','toDate'+wex);
-//	div.find(".datepicker").datepicker();
-	
 	$("#wexp"+(wex-1)).after(div);
+	initializeDatepicker();
 
 	if(wex > 1)
 		$("#wexpDelbtn").show();
@@ -138,21 +138,21 @@ function addWorkExp(){
 
 
 function addTraining(){
+	$('.date').datepicker('destroy');
 	var div = $("#train"+tr).clone(true,true);
 	div.attr('id', 'train'+ ++tr);
 	div.find('label').first().html('Training '+tr);
 	div.find("select.city").html("<option selected disabled>City</option>");
 	div.find("input:text").val("");
+	div.find("#trid").remove();
 	div.find("input:text").removeClass('floating-label-form-group-with-value');
 	div.find("div").removeClass('floating-label-form-group-with-value');
 	
 	div.find('#trfromDate'+(tr-1)).attr('id','trfromDate'+tr);
 	div.find('#trtoDate'+(tr-1)).attr('id','trtoDate'+tr);
-//	div.find(".datepicker").datepicker();
-	
-
-	
 	$("#train"+(tr-1)).after(div);
+	initializeDatepicker();
+
 	if(tr > 1)
 		$("#trDelbtn").show();
 	else
@@ -186,4 +186,14 @@ function removeQualification(){
 		$("#qualDelbtn").show();
 	else
 		$("#qualDelbtn").hide();
+}
+
+function initializeDatepicker() {
+    $('.date').datepicker({
+    	dateFormat:"yy-mm-dd",
+    	changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        yearRange: '1950:2017'
+        });
 }

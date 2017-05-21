@@ -22,7 +22,7 @@ function showModal(data){
 				"<label>Name: </label><span id=\"name\">"+data.name+"</span>&nbsp;&nbsp;&nbsp;"+
 				"<label>Father's Name: </label><span id=\"fathername\">"+data.fatherName+"</span>&nbsp;&nbsp;&nbsp;"+
 				"<label>Mother's Name: </label><span id=\"mothername\">"+data.motherName+"</span>&nbsp;&nbsp;&nbsp;"+
-				"<label>Date Of Birth: </label><span id=\"dob\">"+data.dob+"</span>&nbsp;&nbsp;&nbsp;"+
+				"<label>Date Of Birth: </label><span id=\"dob\">"+data.dob.dayOfMonth+"-"+data.dob.month+"-"+data.dob.year+"</span>&nbsp;&nbsp;&nbsp;"+
 				"<label>Gender: </label><span id=\"gender\">"+data.gender+"</span>&nbsp;&nbsp;&nbsp;"+
 				"<label>Caste: </label><span id=\"caste\">"+data.caste+"</span>&nbsp;&nbsp;&nbsp;"+
 				"<label>Marital Status: </label><span id=\"maritalstatus\">"+data.maritalStatus+"</span>&nbsp;&nbsp;&nbsp;"+
@@ -73,10 +73,12 @@ function showModal(data){
 			{
 				trcont += "<div id=\"company1\">"+
 				  "<label>Company Name: </label><span id=\"compname\">"+data.workExp[i].company+"</span>&nbsp;&nbsp;&nbsp;"+
-					"<label>Title: </label><span id=\"title\">"+data.workExp[i].jobTitle+"</span>&nbsp;&nbsp;&nbsp;"+
-					"<label>From: </label><span id=\"from\">"+data.workExp[i].from+"</span>&nbsp;&nbsp;&nbsp;"+
-					"<label>To: </label><span id=\"to\">"+data.workExp[i].to+"</span>&nbsp;&nbsp;&nbsp;"+
-					"<br><h6>Company Address</h6>"+
+					"<label>Title: </label><span id=\"title\">"+data.workExp[i].jobTitle+"</span>&nbsp;&nbsp;&nbsp;";
+				if(data.workExp[i].fromDate != null)
+					trcont += "<label>From: </label><span id=\"from\">"+data.workExp[i].fromDate.dayOfMonth+"-"+data.workExp[i].fromDate.month+"-"+data.workExp[i].fromDate.year+"</span>&nbsp;&nbsp;&nbsp;";
+				if(data.workExp[i].toDate != null)
+					trcont += "<label>To: </label><span id=\"to\">"+data.workExp[i].toDate.dayOfMonth+"-"+data.workExp[i].toDate.month+"-"+data.workExp[i].toDate.year+"</span>&nbsp;&nbsp;&nbsp;";
+				trcont +="<br><h6>Company Address</h6>"+
 					"<label>Address: </label><span id=\"compaddr\">"+data.workExp[i].address.address+"</span>&nbsp;&nbsp;&nbsp;"+
 					"<label>State: </label><span id=\"compstate\">"+data.workExp[i].address.state+"</span>&nbsp;&nbsp;&nbsp;"+
 					"<label>City: </label><span id=\"compcity\">"+data.workExp[i].address.city+"</span>&nbsp;&nbsp;&nbsp;"+
@@ -87,10 +89,13 @@ function showModal(data){
 			{
 				wexcont += "<div id=\"company1\">"+
 				  "<label>Company Name: </label><span id=\"compname\">"+data.workExp[i].company+"</span>&nbsp;&nbsp;&nbsp;"+
-					"<label>Title: </label><span id=\"title\">"+data.workExp[i].jobTitle+"</span>&nbsp;&nbsp;&nbsp;"+
-					"<label>From: </label><span id=\"from\">"+data.workExp[i].from+"</span>&nbsp;&nbsp;&nbsp;"+
-					"<label>To: </label><span id=\"to\">"+data.workExp[i].to+"</span>&nbsp;&nbsp;&nbsp;"+
-					"<br><h6>Company Address</h6>"+
+					"<label>Title: </label><span id=\"title\">"+data.workExp[i].jobTitle+"</span>&nbsp;&nbsp;&nbsp;";
+				if(data.workExp[i].fromDate != null)
+					wexcont+="<label>From: </label><span id=\"from\">"+data.workExp[i].fromDate.dayOfMonth+"-"+data.workExp[i].fromDate.month+"-"+data.workExp[i].fromDate.year+"</span>&nbsp;&nbsp;&nbsp;";
+				if(data.workExp[i].toDate != null)
+					wexcont+="<label>To: </label><span id=\"to\">"+data.workExp[i].toDate.dayOfMonth+"-"+data.workExp[i].toDate.month+"-"+data.workExp[i].toDate.year+"</span>&nbsp;&nbsp;&nbsp;";
+					
+				wexcont +="<br><h6>Company Address</h6>"+
 					"<label>Address: </label><span id=\"compaddr\">"+data.workExp[i].address.address+"</span>&nbsp;&nbsp;&nbsp;"+
 					"<label>State: </label><span id=\"compstate\">"+data.workExp[i].address.state+"</span>&nbsp;&nbsp;&nbsp;"+
 					"<label>City: </label><span id=\"compcity\">"+data.workExp[i].address.city+"</span>&nbsp;&nbsp;&nbsp;"+
@@ -126,5 +131,4 @@ function showModal(data){
 function edit(id)
 {
 	$("#viewModal").modal('hide');
-	alert(id);
 }

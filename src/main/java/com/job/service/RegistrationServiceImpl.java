@@ -28,7 +28,6 @@ import com.job.model.JobPreferance;
 import com.job.model.PersonalInfo;
 import com.job.model.Qualifications;
 import com.job.model.WorkExperience;
-import com.job.sro.ResponseSRO;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService{
@@ -50,7 +49,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 	
 	@Override
 	@Transactional
-	public ResponseSRO addJobSeeker(AddEditDto data) {
+	public Long addJobSeeker(AddEditDto data) {
 		PersonalInfo personalInfo = new PersonalInfo();
 		Address permAddress = new Address();
 		Address tempAddress = new Address();
@@ -72,7 +71,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 		personalInfo.setQualifications(qualificationList);
 		
 		personalInfoRepo.save(personalInfo);
-		return new ResponseSRO("Saved Succesfully : Reg ID "+personalInfo.getRegistrationId(), false);
+		return personalInfo.getRegistrationId();
 	}
 
 	@Override
@@ -81,7 +80,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 	}
 
 	@Override
-	public ResponseSRO editJobSeeker(AddEditDto data) {
+	public Long editJobSeeker(AddEditDto data) {
 		PersonalInfo personalInfo = personalInfoRepo.findOne(data.getPersonalInfo().getRegistrationId());
 		Address permAddress = data.getPermamentAddress().getId() == null ? new Address() : addressRepo.findById(data.getPermamentAddress().getId());
 		Address tempAddress = data.getTemporaryAddress().getId() == null ? new Address() : addressRepo.findById(data.getTemporaryAddress().getId());
@@ -125,6 +124,7 @@ public class RegistrationServiceImpl implements RegistrationService{
 		personalInfo.setQualifications(qualificationList);
 		
 		personalInfoRepo.save(personalInfo);
-		return new ResponseSRO("Saved Succesfully : Reg ID "+personalInfo.getRegistrationId(), false);	}
+		return personalInfo.getRegistrationId();
+		}
 
 }

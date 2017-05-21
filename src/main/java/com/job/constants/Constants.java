@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Constants {
 
+	public static final String DATE_FORMAT = "yyyy-MM-dd";
 	public static final List<String> degree = Arrays.asList("B.A",
 			"B.Arch",
 			"B.Des.",

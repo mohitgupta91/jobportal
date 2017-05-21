@@ -122,7 +122,7 @@
 						 <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>Email Id</label>
-                                <input class="form-control" placeholder="Email" id="emailId" name="emailId" required data-validation-required-message="Please enter your email address.">
+                                <input class="form-control" placeholder="Email" id="emailId" name="emailId" required type="email" data-validation-required-message="Please enter your email address.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
