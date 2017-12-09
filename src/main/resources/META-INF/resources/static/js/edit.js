@@ -50,26 +50,27 @@ $(document).ready(function(){
     	});
     });
     
-    $("#editForm").validate({
-  	    // Specify validation rules
-  	    rules: {
-  	      "personalInfo[name]": "required",
-  	      "personalInfo[fatherName]": "required",
-  	      "personalInfo[motherName]":"required",
-  	      "personalInfo[email]": {
-  	        required: true,
-  	        email: true
-  	      }
-  	      
-  	    },
-  	    // Specify validation error messages
-  	    messages: {
-  	    	"personalInfo[name]": "Please enter your Name",
-  	    	"personalInfo[fatherName]": "Please enter your Father's name",
-  	     	"personalInfo[email]": "Please enter a valid email address"
-  	    },
-  	  submitHandler: function() {
+    $("#editFormBtn").click(function(){
+//  	    // Specify validation rules
+//  	    rules: {
+//  	      "personalInfo[name]": "required",
+//  	      "personalInfo[fatherName]": "required",
+//  	      "personalInfo[motherName]":"required",
+//  	      "personalInfo[email]": {
+//  	        required: true,
+//  	        email: true
+//  	      }
+//  	      
+//  	    },
+//  	    // Specify validation error messages
+//  	    messages: {
+//  	    	"personalInfo[name]": "Please enter your Name",
+//  	    	"personalInfo[fatherName]": "Please enter your Father's name",
+//  	     	"personalInfo[email]": "Please enter a valid email address"
+//  	    },
+//  	  submitHandler: function() {
   		json = $("#editForm").serializeJSON();
+  		alert(json);
   		$.ajax({
   			   url: 'http://localhost:8080/register/edit',
   			   type : 'POST',
@@ -77,7 +78,7 @@ $(document).ready(function(){
   			   contentType : 'application/json',
   			   data: json ,
   			  success: function(data) {
-  				  window.location="http://localhost:8080/view?flag"
+  				  window.location="http://localhost:8080/view?flag=true"
   			  },
   			  error: function() {
   			     $('#notification-msg').text("Please check the form");
@@ -85,8 +86,7 @@ $(document).ready(function(){
   		         $('#notification').show();
   		      }
   			   });
-  	  }
-  	});
+  	  });
 });
 
 var qual = $("#qualIndex").val();

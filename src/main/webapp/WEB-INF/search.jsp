@@ -66,12 +66,12 @@
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Minimum Age</label>                            
-                                <input class="form-control" placeholder="Minimum Age" id="minAge" name="minAge" >
+                                <input class="form-control" placeholder="Minimum Age" type="number" id="minAge" name="minAge" >
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group col-xs-6 floating-label-form-group controls" style="float:right">
                                 <label>Maximum Age</label>
-                                <input class="form-control" placeholder="Maximum Age" id="maxAge" name="maxAge" >
+                                <input class="form-control" placeholder="Maximum Age" type="number" id="maxAge" name="maxAge" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -171,12 +171,12 @@
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Minimum</label>                            
-                                <input class="form-control" placeholder="Minimum Experience" id="minAge" name="minExp" >
+                                <input class="form-control" placeholder="Minimum Experience"  type="number" id="minAge" name="minExp" >
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group col-xs-6 floating-label-form-group controls" style="float:right">
                                 <label>Maximum</label>
-                                <input class="form-control" placeholder="Maximum Experience" id="maxExp" name="maxExp" >
+                                <input class="form-control" placeholder="Maximum Experience" type="number" id="maxExp" name="maxExp" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -184,15 +184,15 @@
                      </div>
                     </div>   
                        
-                    <div class="col-lg-8 ">
+                    <div class="col-lg-12 ">
                         <div class="modal-body">
                             <h2>Job Function <a id="jf-btn" data-toggle="collapse" data-target="#jfInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      <br>
                     <div class="collapse" id="jfInfo">
-                           <div class="row control-group col-lg-offset-2">
+                           <div class="row control-group col-lg-offset-1">
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Type</label> 
-								<select  class="form-control col-xs-6" 	id="jobType" name="jobType">
+								<select  class="form-control col-xs-12" 	id="jobType" name="jobType">
 									<option selected disabled>Job Type</option>
 									<c:forEach var="jt" items="${jobTypes}">
                                 	<option value="${jt}">${jt.jobType}</option>
@@ -216,12 +216,12 @@
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Minimum</label>                            
-                                <input class="form-control" placeholder="Minimum Salary" id="minSal" name="minSal" >
+                                <input class="form-control" placeholder="Minimum Salary" type="number" id="minSal" name="minSal" >
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group col-xs-6 floating-label-form-group controls" style="float:right">
                                 <label>Maximum</label>
-                                <input class="form-control" placeholder="Maximum Salary" id="maxSal" name="maxSal" >
+                                <input class="form-control" placeholder="Maximum Salary" type="number" id="maxSal" name="maxSal" >
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>

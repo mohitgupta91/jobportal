@@ -33,7 +33,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		            .passwordParameter("password").permitAll()
 					.and().logout().permitAll()
 					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-					.and().exceptionHandling().accessDeniedPage("/login?error");
+					.and().exceptionHandling().accessDeniedPage("/login?error=true");
 		
 	}
 }

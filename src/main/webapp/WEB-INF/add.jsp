@@ -48,7 +48,6 @@
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a> 
                          </h2>
                         </div>
-                          <br>
                    	 <div class="collapse" id="personalInfo"> 
                    	 	<div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-8 floating-label-form-group controls">
@@ -183,8 +182,6 @@
                             <h2>Address  <a id="add-btn" data-toggle="collapse" data-target="#addInfo">
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
-                     <br>
-                     
                       <div class="collapse" id="addInfo"> 
                        <div class="row control-group col-lg-offset-2">
                             <label>Permanent Address</label>
@@ -260,16 +257,15 @@
                             <h2>Qualifications  <a id="qual-btn" data-toggle="collapse" data-target="#qualInfo">
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
-                     <br>
                      <div class="collapse" id="qualInfo"> 
-                     <div id="qual1">
+                     <div id="qual1" style="display:none">
                      <div class="row control-group col-lg-offset-2">
                            <label>Qualification 1</label>
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>Degree</label>                            
                                 <select class="form-control col-xs-6"
-									id="degree" name="qualifications[][degree]">
+									id="degree" name="qualifications[][degree]" required>
 									<option selected disabled>Degree</option>
 									<c:forEach var="degree" items="${degree}">
 										<option value="${degree}">${degree}</option>
@@ -280,7 +276,7 @@
                           <div class="row control-group col-lg-offset-2">
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>School/College</label>
-                                <input class="form-control" placeholder="School/College" id="college" name="qualifications[][college]" >
+                                <input class="form-control" placeholder="School/College" id="college" name="qualifications[][college]" required>
                             </div>
                             <div class="form-group col-xs-6 floating-label-form-group controls">
                                 <label>University</label>
@@ -319,9 +315,8 @@
                             <h2>Work Experience  <a id="exp-btn" data-toggle="collapse" data-target="#expInfo">
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
-                     <br>
                      <div class="collapse" id="expInfo"> 
-                     <div id="wexp1">
+                     <div id="wexp1" style="display:none">
                      <div class="row control-group col-lg-offset-2">
                            <label>Job 1</label>
                             <br>
@@ -380,12 +375,12 @@
 							</div>
 						</div>
                      </div>
+                     <br>
                      </div>
                      
                      	<div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 ">
-                            <br><br><br>
-								<button type="button" class="btn btn-info" onclick="addWorkExp()">Add Job</button>
+                   			<button type="button" class="btn btn-info" onclick="addWorkExp()">Add Job</button>
 								<button type="button" id="wexpDelbtn" class="btn btn-primary" onclick="removeWorkExp()">Remove Job</button>
 							</div>
 						</div>
@@ -397,9 +392,8 @@
                             <h2>Training  <a id="training-btn" data-toggle="collapse" data-target="#trainingInfo">
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
-                     <br>
                      <div class="collapse" id="trainingInfo"> 
-                     <div id="train1">
+                     <div id="train1" style="display:none">
                      <div class="row control-group col-lg-offset-2">
                      	
                            <label>Training 1</label>
@@ -458,11 +452,10 @@
 								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" name="training[][address][tehsil]" >
 							</div>
 						</div>
-						</div>						
+						</div><br>						
                      </div>
                      
             	         <div class="row control-group col-lg-offset-2" id="trAddRemDiv">
-                            <br><br><br>
                             <div  class="col-xs-6 ">
 								<button type="button" id="trAddbtn" class="btn btn-info" onclick="addTraining()">Add Training</button>
 								<button type="button" id="trDelbtn" class="btn btn-primary" onclick="removeTraining()" >Remove Training</button>
@@ -478,7 +471,6 @@
                             <h2>Job Function  <a id="jf-btn" data-toggle="collapse" data-target="#jfInfo">
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
-                     <br>
                     	<div class="collapse" id="jfInfo"> 
                            <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
@@ -499,7 +491,6 @@
                             <h2>Job Preference  <a id="jp-btn" data-toggle="collapse" data-target="#jpInfo">
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
-                     <br>
                      <div class="collapse" id="jpInfo"> 
                            <div class="row control-group col-lg-offset-2">
                             <label>Location</label>
@@ -555,7 +546,6 @@
                             <h2>Salary  <a id="sal-btn" data-toggle="collapse" data-target="#salInfo">
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
-                     <br>
                     <div class="collapse" id="salInfo"> 
                     <div class="row control-group col-lg-offset-2">
                             <label>Salary</label>

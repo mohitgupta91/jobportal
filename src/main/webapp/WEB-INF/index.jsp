@@ -55,6 +55,9 @@
                     <li>
                         <a href="#loginModal" class="portfolio-link" data-toggle="modal">Login</a>
                     </li>
+                    <li>
+                        <a href="<c:url value="/register"/>" class="portfolio-link" >Register</a>
+                    </li>
                     <li class="page-scroll">
                         <a href="#about">About</a>
                     </li>

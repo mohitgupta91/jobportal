@@ -59,9 +59,12 @@ public class RegistrationServiceImpl implements RegistrationService{
 		List<Qualifications> qualificationList = new ArrayList<>();
 		
 		convertPesonalInfoDto(data.getPersonalInfo(), personalInfo);
-		data.getWorkExperience().forEach( item -> workExList.add(convertWorkExDto(item, new WorkExperience(),false)));
-		data.getTraining().forEach( item -> trainingList.add(convertWorkExDto(item, new WorkExperience(),true)));
-		data.getQualifications().forEach( item -> qualificationList.add(convertQualificationDto(item, new Qualifications())));
+		if(data.getWorkExperience() != null && data.getWorkExperience().size() > 0)
+			data.getWorkExperience().forEach( item -> workExList.add(convertWorkExDto(item, new WorkExperience(),false)));
+		if(data.getTraining() != null && data.getTraining().size() > 0)
+			data.getTraining().forEach( item -> trainingList.add(convertWorkExDto(item, new WorkExperience(),true)));
+		if(data.getQualifications() != null && data.getQualifications().size() > 0)
+			data.getQualifications().forEach( item -> qualificationList.add(convertQualificationDto(item, new Qualifications())));
 		workExList.addAll(trainingList);
 		personalInfo.setPermanentAddress(convertAddressDto(data.getPermamentAddress(), permAddress));
 		personalInfo.setTemporaryAddress(convertAddressDto(data.getTemporaryAddress(), tempAddress));

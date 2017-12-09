@@ -203,8 +203,8 @@
                         <div class="row control-group col-lg-offset-2">
                         	<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
                                 <label>Year</label>                            
-                                <input class="form-control" placeholder="Years" id="expYears" value="<fmt:parseNumber var="intValue" integerOnly="true" 
-                       type="number" value="${data.totalExperience/12}" />"name="personalInfo[expYears]" >
+                                <input class="form-control" type="number" placeholder="Years" id="expYears" value="<fmt:formatNumber type = "number" 
+          maxFractionDigits = "0" value = "${(data.totalExperience - (data.totalExperience%12)) /12}" />" name="personalInfo[expYears]" >
                                 <p class="help-block text-danger"></p>
                             </div>
                            	<div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
@@ -889,7 +889,7 @@
                         <div class="row">
                             <div class="form-group col-xs-12">
                             <br><br><br>
-                                <button  class="btn btn-success btn-lg" >Update</button>
+                                <button type="button" id="editFormBtn" class="btn btn-success btn-lg" >Update</button>
                             </div>
                         </div>
                     </form>
