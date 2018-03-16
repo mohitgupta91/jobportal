@@ -17,6 +17,8 @@
 
     <!-- Theme CSS -->
     <link href="/static/css/freelancer.css" rel="stylesheet">
+    
+    <link href="/static/css/jquery.dataTables.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -45,12 +47,13 @@
                    <h3>Job Seekers</h3>
                 </div>
  
-            <table class="table">
+            <table class="table" id="table">
             	<thead>
             		<tr style="font-size: 1.85em;">
             			<th>Reg. ID</th>
             			<th>Name</th>
-            			<th>Current Salary</th>
+            			<th>Category</th>
+            			<th>Date Of Birth</th>
             			<th>Contact</th>
             			<th>Action</th>
             		</tr>
@@ -60,7 +63,8 @@
 						<tr>
 						<td>${item.registrationId}</td>
 						<td>${item.name}</td>
-						<td>${item.currentSalary}</td>
+						<td>${item.category}</td>
+						<td>${item.dob}</td>
 						<td>${item.contactNumber}</td>
 						<td><button type="button" class="btn btn-info" onclick="getDetails(${item.registrationId})">View Details</button></td>
 						</tr>
@@ -106,6 +110,7 @@
 
     <!-- Contact Form JavaScript -->
     <script src="static/js/jqBootstrapValidation.js"></script>
+    <script src="static/js/jquery.dataTables.min.js"></script>
     <script src="static/js/contact_me.js"></script>
     <script src="static/js/freelancer.js"></script>
 	<script src="static/js/menu.js"></script>

@@ -50,8 +50,16 @@ $(document).ready(function(){
     		  }
     	});
     });
+    $("#same").click(function(){
+    	$("#praddress").val($("#tmpaddress").val());
+      	$("#prstate").val($("#tmpstate").val());
+      	$("#prcity").val($("#tmpcity").val());
+      	$("#prtehsil").val($("#tmptehsil").val());
+       
+    });
     
     $("#addBtn").click(function(){
+    	
     	json = $("#addForm").serializeJSON();
   		var formData = JSON.parse(json);
   		
@@ -59,8 +67,14 @@ $(document).ready(function(){
   		if(wex == 0) delete formData.workExperience;
   		if(qual == 0) delete formData.qualifications;
  
- 		validateJson(formData);
- 		 
+ 		var response = validateJson(formData);
+ 		if(response != null && response != ""){
+ 			 $('#notification-msg').text(response);
+		     $('#notification').attr('class','alert fade in alert-danger');
+		     $('#notification').show();
+		     window.location.hash = '#notification';
+		     return;
+ 		}
   		$.ajax({
   			   url: 'http://localhost:8080/register/add',
   			   type : 'POST',
@@ -74,9 +88,10 @@ $(document).ready(function(){
   			     $('#notification-msg').text("Error occured please contact Admin or Fill the form properly");
   		         $('#notification').attr('class','alert fade in alert-danger');
   		         $('#notification').show();
+  		         $('#notification').focus();
   		      }
-  			   });
-  	});
+  	});	
+    	});
     
 });
 
@@ -232,30 +247,37 @@ function validateJson(form){
 	var text_reg = new RegExp("([a-zA-Z])\D\w*");
 	var email_reg = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
 
-	if( regTester(text_reg, form.personalInfo.name))
-		error_msg += "Incorrect Full Name\n"
-	if( regTester(text_reg, form.personalInfo.email))
-		error_msg += "Invalid Email ID\n"		
-	if( regTester(text_reg, form.personalInfo.fatherName))
-		error_msg += "Incorrect Father Name\n"		
-	if( regTester(text_reg, form.personalInfo.motherName))
-		error_msg += "Incorrect Mother Name\n"
-	if( regTester(text_reg, form.personalInfo.gender))
-		error_msg += "Select Gender\n"
-	if( regTester(text_reg, form.personalInfo.caste))
-		error_msg += "Select Caste\n"		
+	if( regTester(text_reg, form.personalInfo.name)){
+		if(form.personalInfo.name.length < 3)
+		return "Incorrect Full Name. Please provide proper name";
+	}
+	if( regTester(text_reg, form.personalInfo.email)){
+		return "Invalid Email ID";
+	}		
+	if( regTester(text_reg, form.personalInfo.fatherName)){
+		return "Incorrect Father Name";
+	}		
+	if( regTester(text_reg, form.personalInfo.motherName)){
+		return "Incorrect Mother Name\n";
+	}
+	if( regTester(text_reg, form.personalInfo.gender)){
+		return "Select Gender";
+	}
+	if( regTester(text_reg, form.personalInfo.caste)){
+		return "Select Caste";
+	}		
 	if( form.personalInfo.dob == "")
-		error_msg += "Enter Date of Birth\n"		
+		return "Enter Date of Birth";		
 	if( regTester(text_reg, form.personalInfo.maritalStatus))
-		error_msg += "Choose Martial Status\n"
+		return "Choose Martial Status";
 	if( form.personalInfo.maritalStatus == "Married" && regTester(text_reg, form.personalInfo.spouseName))
-		error_msg += "Invalid Spouse Name\n"
+		return "Invalid Spouse Name";
 	if( regTester(text_reg, form.personalInfo.idType))
-		error_msg += "Choose Id Type\n"
+		return "Choose Id Type";
 	if( regTester(text_reg, form.personalInfo.idNumber))
-		error_msg += "Invalid ID\n"
+		return "Invalid ID";
 	if( form.personalInfo.contactNumber == "")
-		error_msg += "Invalid Contact Number\n"
+		return "Invalid Contact Number";
 										
 			
 

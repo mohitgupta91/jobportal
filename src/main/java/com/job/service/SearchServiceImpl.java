@@ -9,8 +9,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.job.constants.Caste;
+import com.job.constants.Category;
 import com.job.constants.JobTypes;
+import com.job.constants.Religion;
 import com.job.dao.PersonalInfoRepository;
 import com.job.dto.SearchDto;
 import com.job.model.PersonalInfo;
@@ -84,7 +85,10 @@ public class SearchServiceImpl implements SearchService{
 		tempList = findByAge(dto.getMaxAge(),dto.getMinAge());
 		if(tempList != null) regSet.addAll(tempList);
 		
-		tempList = findByCaste(dto.getCaste());
+		tempList = findByReligion(dto.getReligion());
+		if(tempList != null) regSet.addAll(tempList);
+		
+		tempList = findByCategory(dto.getCategory());
 		if(tempList != null) regSet.addAll(tempList);
 		
 		tempList = findByGender(dto.getGender());
@@ -99,8 +103,8 @@ public class SearchServiceImpl implements SearchService{
 		tempList = findByCity(dto.getCity());
 		if(tempList != null) regSet.addAll(tempList);
 		
-		tempList = findByTotalExperience(dto.getMaxExp(), dto.getMinExp());
-		if(tempList != null) regSet.addAll(tempList);
+//		tempList = findByTotalExperience(dto.getMaxExp(), dto.getMinExp());
+//		if(tempList != null) regSet.addAll(tempList);
 		
 		tempList = findByExpectedSalary(dto.getMaxSal(), dto.getMinSal());
 		if(tempList != null) regSet.addAll(tempList);
@@ -135,14 +139,22 @@ public class SearchServiceImpl implements SearchService{
 		return null;
 	}
 	
-	private List<Long> findByCaste(String casteString) {
-		if(casteString == null)	return null;
-		Caste caste = Caste.valueOf(casteString);
+	private List<Long> findByReligion(String religionString) {
+		if(religionString == null)	return null;
+		Religion religion = Religion.valueOf(religionString);
 		List<Long> list = new ArrayList<>();
-		repo.findByCaste(caste).forEach(item -> list.add(item.getRegistrationId()));
+		repo.findByReligion(religion).forEach(item -> list.add(item.getRegistrationId()));
 		return list;
 	}
 
+	private List<Long> findByCategory(String categoryString) {
+		if(categoryString == null)	return null;
+		Category category = Category.valueOf(categoryString);
+		List<Long> list = new ArrayList<>();
+		repo.findByCategory(category).forEach(item -> list.add(item.getRegistrationId()));
+		return list;
+	}
+	
 	private List<Long> findByMaritalStatus(String status) {
 		if(status == null)	return null;
 		List<Long> list = new ArrayList<>();
@@ -187,23 +199,23 @@ public class SearchServiceImpl implements SearchService{
 		return list;
 	}
 
-	private List<Long> findByTotalExperience(Integer maxExp, Integer minExp) {
-		if(minExp == null && maxExp == null)	return null;
-		List<Long> list = new ArrayList<>();
-		if(maxExp != null && minExp != null){
-			repo.findByTotalExperience(maxExp * 12, minExp * 12).forEach(item -> list.add(item.getRegistrationId()));
-			return list;
-		}
-		else if(maxExp != null){
-			repo.findByMaxTotalExperience(maxExp * 12).forEach(item -> list.add(item.getRegistrationId()));
-			return list;
-		}
-		else if (minExp != null){
-			repo.findByMinTotalExperience(minExp * 12).forEach(item -> list.add(item.getRegistrationId()));
-			return list;
-		}
-		return null;
-	}
+//	private List<Long> findByTotalExperience(Integer maxExp, Integer minExp) {
+//		if(minExp == null && maxExp == null)	return null;
+//		List<Long> list = new ArrayList<>();
+//		if(maxExp != null && minExp != null){
+//			repo.findByTotalExperience(maxExp * 12, minExp * 12).forEach(item -> list.add(item.getRegistrationId()));
+//			return list;
+//		}
+//		else if(maxExp != null){
+//			repo.findByMaxTotalExperience(maxExp * 12).forEach(item -> list.add(item.getRegistrationId()));
+//			return list;
+//		}
+//		else if (minExp != null){
+//			repo.findByMinTotalExperience(minExp * 12).forEach(item -> list.add(item.getRegistrationId()));
+//			return list;
+//		}
+//		return null;
+//	}
 	
 	private List<Long> findByExpectedSalary(Integer maxSal, Integer minSal) {
 		if(minSal == null && maxSal == null)	return null;

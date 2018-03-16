@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.job.constants.Role;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -20,7 +18,9 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		
 		authRegistry.antMatchers("/static/**").permitAll()
 					.antMatchers("/vendor/**").permitAll()
-					.antMatchers("/").permitAll();
+					.antMatchers("/login").permitAll()
+					.antMatchers("/signUp").permitAll()
+					.antMatchers("/user/check").permitAll();
 
 		authRegistry.antMatchers("/user/**").access("hasRole('ROLE_ADMIN')")
 					.antMatchers("/view/**").access("hasRole('ROLE_ADMIN')");
@@ -37,5 +37,3 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		
 	}
 }
-
-

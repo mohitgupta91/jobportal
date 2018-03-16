@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.job.cache.StateCityCache;
-import com.job.constants.Caste;
+import com.job.constants.Category;
 import com.job.constants.Constants;
 import com.job.constants.JobTypes;
+import com.job.constants.Religion;
 import com.job.dto.SearchDto;
 import com.job.model.PersonalInfo;
 import com.job.service.SearchService;
@@ -36,7 +37,8 @@ public class SearchController {
 	{
 		map.put("title","Search");
 		map.put("states", stateCityCache.getCache().keySet());
-		map.put("castes", Arrays.asList(Caste.values()));
+		map.put("categories", Arrays.asList(Category.values()));
+		map.put("religions", Arrays.asList(Religion.values()));
 		map.put("jobTypes", Arrays.asList(JobTypes.values()));
 		map.put("degree", Constants.degree);
 		return "search";
@@ -52,7 +54,8 @@ public class SearchController {
 		map.put("type", "success");
 		map.put("title","Search");
 		map.put("states", stateCityCache.getCache().keySet());
-		map.put("castes", Arrays.asList(Caste.values()));
+		map.put("categories", Arrays.asList(Category.values()));
+		map.put("religions", Arrays.asList(Religion.values()));
 		map.put("jobTypes", Arrays.asList(JobTypes.values()));
 		map.put("degree", Constants.degree);
 		return "search";

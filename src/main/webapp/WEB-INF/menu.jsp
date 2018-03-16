@@ -17,12 +17,16 @@
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
-                    <li>
-                        <a href="<c:url value="/search"/>">Search</a>
-                    </li>
-                    <li>
+                    <security:authorize access="hasAnyRole('ROLE_ADMIN')">
+		            <li>
+                         <a href="<c:url value="/search"/>">Search</a>
+       				</li>
+                    </security:authorize>
+                    <security:authorize access="hasAnyRole('ROLE_ADMIN')">
+		            <li>
                         <a href="<c:url value="/register"/>" >Register</a>
                     </li>
+                    </security:authorize>
                     <security:authorize access="hasAnyRole('ROLE_ADMIN')">
 				    <li>
                         <a href="<c:url value="/view"/>">View</a>

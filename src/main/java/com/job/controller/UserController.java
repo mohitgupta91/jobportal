@@ -102,4 +102,16 @@ public class UserController {
 		map.put("users", userService.getUsers());
 		return "user";
 	}
+	
+	@RequestMapping(value="/check")
+	@ResponseBody
+	public String checkUser(@RequestParam("username") String userName) {
+		return Boolean.valueOf(userService.checkUser(userName)).toString();
+	}
+	
+	@RequestMapping(value="/{id}/userName", method=RequestMethod.GET)
+	@ResponseBody
+	public String getUserNameFromID(@PathVariable Long id) {
+		return userService.findUserById(id).getUserName();
+	}
 }

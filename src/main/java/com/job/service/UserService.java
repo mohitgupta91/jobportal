@@ -30,5 +30,7 @@ public interface UserService extends UserDetailsService {
 	void changeCurrentUserPassword(String passwd);
 
 	void changeUserPassword(Long id, String passwd);
+	
+	void autoLogin(String userName, String password);
 
 }

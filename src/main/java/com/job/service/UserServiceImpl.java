@@ -6,6 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -17,11 +19,14 @@ import com.job.model.WebUser;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepo;
-	
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 		WebUser user = userRepo.findByUserName(userName);
@@ -89,6 +94,19 @@ public class UserServiceImpl implements UserService{
 		WebUser user = userRepo.findOne(id);
 		user.setPassword(passwd);
 		userRepo.save(user);
+	}
+
+	@Override
+	public void autoLogin(String userName, String password) {
+		UserDetails userDetails = loadUserByUsername(userName);
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+				userDetails, password, userDetails.getAuthorities());
+
+		authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+
+		if (usernamePasswordAuthenticationToken.isAuthenticated()) {
+			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+		}
 	}
 
 }

@@ -20,95 +20,100 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.job.constants.Caste;
+import com.job.constants.Category;
 import com.job.constants.JobTypes;
+import com.job.constants.Religion;
 
 @Entity
-@Table(name="personal_info")
+@Table(name = "personal_info")
 
-public class PersonalInfo extends BaseEntity{
+public class PersonalInfo extends BaseEntity {
 
 	@Id
-	@SequenceGenerator(name="personal_seq",initialValue=1000, allocationSize = 1)
-	@GeneratedValue(strategy=GenerationType.AUTO,generator="personal_seq" )
-	@Column(name="reg_id",nullable=false,unique=true)
+	@SequenceGenerator(name = "personal_seq", initialValue = 1000, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "personal_seq")
+	@Column(name = "reg_id", nullable = false, unique = true)
 	private Long registrationId;
-	
-	@Column(name="name",nullable=false)
+
+	@Column(name = "name", nullable = false)
 	private String name;
-	
-	@Column(name="gender",nullable=false)
+
+	@Column(name = "gender", nullable = false)
 	private String gender;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="dob",nullable=false)
+
+	@Column(name = "dob", nullable = false)
 	private LocalDate dob;
-	
-	@Column(name="marital_status")
+
+	@Column(name = "marital_status")
 	private String maritalStatus;
-	
-	@Column(name="spouse_name")
+
+	@Column(name = "spouse_name")
 	private String spouseName;
-	
-	@Column(name="father_name")
+
+	@Column(name = "father_name")
 	private String fatherName;
-	
-	@Column(name="mother_name")
+
+	@Column(name = "mother_name")
 	private String motherName;
-	
-	@Column(name="caste")
+
+	@Column(name = "religion")
 	@Enumerated(EnumType.STRING)
-	private Caste caste;
-	
-	@Column(name="contact_number")
+	private Religion religion;
+
+	@Column(name = "category")
+	@Enumerated(EnumType.STRING)
+	private Category category;
+
+	@Column(name = "contact_number")
 	private String contactNumber;
-	
-	@Column(name="contact_number2")
+
+	@Column(name = "contact_number2")
 	private String contactNumber2;
-	
-	@Column(name="id_type")
+
+	@Column(name = "id_type")
 	private String idType;
-	
-	@Column(name="id_number")
+
+	@Column(name = "id_number")
 	private String idNumber;
-	
-	@Column(name="total_exp")
+
+	@Column(name = "total_exp")
 	private Integer totalExperience = 0;
-	
-	@Column(name="exp_salary")
+
+	@Column(name = "exp_salary")
 	private Integer expectedSalary = 0;
-	
-	@Column(name="curr_salary")
+
+	@Column(name = "curr_salary")
 	private Integer currentSalary = 0;
-	
-	@OneToOne(cascade = {CascadeType.ALL})
+
+	@OneToOne(cascade = { CascadeType.ALL })
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="permanent_address",referencedColumnName = "id")
+	@JoinColumn(name = "permanent_address", referencedColumnName = "id")
 	private Address permanentAddress;
-	
-	@OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name="temp_address",referencedColumnName = "id")
-    private Address temporaryAddress;
-	
-	@OneToMany(cascade = {CascadeType.ALL})
+
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "temp_address", referencedColumnName = "id")
+	private Address temporaryAddress;
+
+	@OneToMany(cascade = { CascadeType.ALL })
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="reg_id")
+	@JoinColumn(name = "reg_id")
 	private List<WorkExperience> workExp;
-	
-	@OneToMany(cascade = {CascadeType.ALL})
+
+	@OneToMany(cascade = { CascadeType.ALL })
 	@Fetch(FetchMode.SELECT)
 	private List<Qualifications> qualifications;
-	
-	@Column(name="computer_skill")
+
+	@Column(name = "computer_skill")
 	private Boolean computerSkill;
-	
-	@Column(name="job_req")
+
+	@Column(name = "job_req")
 	@Enumerated(EnumType.STRING)
 	private JobTypes jobRequirement;
-	
-	@OneToOne(cascade = {CascadeType.ALL})
+
+	@OneToOne(cascade = { CascadeType.ALL })
 	@Fetch(FetchMode.SELECT)
 	private JobPreferance preferance;
 
@@ -174,14 +179,6 @@ public class PersonalInfo extends BaseEntity{
 
 	public void setMotherName(String motherName) {
 		this.motherName = motherName;
-	}
-
-	public Caste getCaste() {
-		return caste;
-	}
-
-	public void setCaste(Caste caste) {
-		this.caste = caste;
 	}
 
 	public String getContactNumber() {
@@ -271,7 +268,7 @@ public class PersonalInfo extends BaseEntity{
 	public void setPreferance(JobPreferance preferance) {
 		this.preferance = preferance;
 	}
-	
+
 	public Integer getTotalExperience() {
 		return totalExperience;
 	}
@@ -279,7 +276,7 @@ public class PersonalInfo extends BaseEntity{
 	public void setTotalExperience(Integer totalExperience) {
 		this.totalExperience = totalExperience;
 	}
-	
+
 	public Integer getExpectedSalary() {
 		return expectedSalary;
 	}
@@ -304,15 +301,33 @@ public class PersonalInfo extends BaseEntity{
 		this.email = email;
 	}
 
+	public Religion getReligion() {
+		return religion;
+	}
+
+	public void setReligion(Religion religion) {
+		this.religion = religion;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	@Override
 	public String toString() {
 		return "PersonalInfo [registrationId=" + registrationId + ", name=" + name + ", gender=" + gender + ", email="
 				+ email + ", dob=" + dob + ", maritalStatus=" + maritalStatus + ", spouseName=" + spouseName
-				+ ", fatherName=" + fatherName + ", motherName=" + motherName + ", caste=" + caste + ", contactNumber="
-				+ contactNumber + ", contactNumber2=" + contactNumber2 + ", idType=" + idType + ", idNumber=" + idNumber
-				+ ", totalExperience=" + totalExperience + ", expectedSalary=" + expectedSalary + ", currentSalary="
-				+ currentSalary + ", permanentAddress=" + permanentAddress + ", temporaryAddress=" + temporaryAddress
-				+ ", workExp=" + workExp + ", qualifications=" + qualifications + ", computerSkill=" + computerSkill
-				+ ", jobRequirement=" + jobRequirement + ", preferance=" + preferance + "]";
+				+ ", fatherName=" + fatherName + ", motherName=" + motherName + ", religion=" + religion + ", category="
+				+ category + ", contactNumber=" + contactNumber + ", contactNumber2=" + contactNumber2 + ", idType="
+				+ idType + ", idNumber=" + idNumber + ", totalExperience=" + totalExperience + ", expectedSalary="
+				+ expectedSalary + ", currentSalary=" + currentSalary + ", permanentAddress=" + permanentAddress
+				+ ", temporaryAddress=" + temporaryAddress + ", workExp=" + workExp + ", qualifications="
+				+ qualifications + ", computerSkill=" + computerSkill + ", jobRequirement=" + jobRequirement
+				+ ", preferance=" + preferance + "]";
 	}
+
 }

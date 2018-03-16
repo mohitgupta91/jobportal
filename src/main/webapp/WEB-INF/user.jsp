@@ -17,7 +17,7 @@
 
     <!-- Theme CSS -->
     <link href="/static/css/freelancer.css" rel="stylesheet">
-
+ 	<link href="/static/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -45,7 +45,7 @@
                    <h3>Users</h3>
                 </div>
  
-            <table class="table">
+            <table class="table" id="userTable">
             	<thead>
             		<tr style="font-size: 1.85em;">
             			<th>UserName</th>
@@ -103,7 +103,12 @@
                         <div class="modal-body">
                             <h2>Add User</h2>
                             <hr class="star-primary">
+                            
+                 		<div id="notification1" class="alert fade in" style="display:none;" >
+							<span id="notification-msg1"></span>
+						</div>
                  <form name="userAdd" id="userAdd" action='<c:url value="/user/add"/>' method="post">
+                 <br>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label>UserName</label>
@@ -139,7 +144,7 @@
                         <div id="success"></div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <button id="addBtn" type="submit" class="btn btn-success btn-lg">Add</button>
+                                <button id="addBtn" type="button" class="btn btn-success btn-lg">Add</button>
                             </div>
                         </div>
                     </form>
@@ -166,6 +171,7 @@
                         <div class="modal-body">
                             <h2>Change Password</h2>
                             <hr class="star-primary">
+                            <br><label id="lbl"></label><br><br>
                  <form name="chPasswd" id="chPasswdUser" method="post">
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -219,7 +225,7 @@
     <script src="/static/js/freelancer.js"></script>
 	<script src="/static/js/menu.js"></script>
 	
-    
+     <script src="static/js/jquery.dataTables.min.js"></script>
 </body>
 
 </html>

@@ -22,6 +22,8 @@ public class AddEditDto {
 	
 	private JobPreferanceDto jobPreferance;
 
+	private WebUserDto user;
+	
 	public PersonalInfoDto getPersonalInfo() {
 		return personalInfo;
 	}
@@ -94,13 +96,20 @@ public class AddEditDto {
 		this.jobPreferance = jobPreferance;
 	}
 
+	public WebUserDto getUser() {
+		return user;
+	}
+
+	public void setUser(WebUserDto user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "AddEditDto [personalInfo=" + personalInfo + ", permamentAddress=" + permamentAddress
 				+ ", temporaryAddress=" + temporaryAddress + ", qualifications=" + qualifications + ", workExperience="
 				+ workExperience + ", training=" + training + ", jobType=" + jobType + ", computerSkill="
-				+ computerSkill + ", jobPreferance=" + jobPreferance +"]";
+				+ computerSkill + ", jobPreferance=" + jobPreferance + ", user=" + user + "]";
 	}
-	
-	
+
 }

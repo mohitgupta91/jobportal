@@ -27,7 +27,7 @@ $(document).ready(function(){
         $("#trainingInfo").collapse('toggle'); // toggle collapse
       });
 
-    initializeDatepicker();
+    initializeDatePicker();
     
     $('.state').change(function(){
     	var state = $(this).val();
@@ -51,34 +51,34 @@ $(document).ready(function(){
     });
     
     $("#editFormBtn").click(function(){
-//  	    // Specify validation rules
-//  	    rules: {
-//  	      "personalInfo[name]": "required",
-//  	      "personalInfo[fatherName]": "required",
-//  	      "personalInfo[motherName]":"required",
-//  	      "personalInfo[email]": {
-//  	        required: true,
-//  	        email: true
-//  	      }
-//  	      
-//  	    },
-//  	    // Specify validation error messages
-//  	    messages: {
-//  	    	"personalInfo[name]": "Please enter your Name",
-//  	    	"personalInfo[fatherName]": "Please enter your Father's name",
-//  	     	"personalInfo[email]": "Please enter a valid email address"
-//  	    },
-//  	  submitHandler: function() {
+
   		json = $("#editForm").serializeJSON();
-  		alert(json);
+  		var formData = JSON.parse(json);
+  		
+  		if(tr == 0) delete formData.training;
+  		if(wex == 0) delete formData.workExperience;
+  		if(qual == 0) delete formData.qualifications;
+ 
+ 		var response = validateJson(formData);
+ 		if(response != null && response != ""){
+ 			 $('#notification-msg').text(response);
+		     $('#notification').attr('class','alert fade in alert-danger');
+		     $('#notification').show();
+		     window.location.hash = '#notification';
+		     return;
+ 		} 
   		$.ajax({
   			   url: 'http://localhost:8080/register/edit',
   			   type : 'POST',
   			   dataType : 'json',
   			   contentType : 'application/json',
-  			   data: json ,
+  			   data: JSON.stringify(formData) ,
   			  success: function(data) {
-  				  window.location="http://localhost:8080/view?flag=true"
+  				  if(admin)
+  					  window.location="http://localhost:8080/view?flag=true";
+  				  else {
+  					window.location="http://localhost:8080/register/edit/home?flag=true";
+  				  }
   			  },
   			  error: function() {
   			     $('#notification-msg').text("Please check the form");
@@ -89,106 +89,140 @@ $(document).ready(function(){
   	  });
 });
 
-var qual = $("#qualIndex").val();
-var tr = $("#trIndex").val();
-var wex = $("#wexIndex").val();
 
 function addQualification() {
-	var div = $("#qual"+qual).clone(true,true);
-	div.attr('id', 'qual'+ ++qual);
-	div.find('label').first().html('Qualification '+qual);
-	div.find("#qualid").remove();
-	div.find("input:text").val("");
-	div.find("input:text").removeClass('floating-label-form-group-with-value');
-	div.find("div").removeClass('floating-label-form-group-with-value');
-	
-	$("#qual"+(qual-1)).after(div);
-	if(qual > 1)
+	if(qual == 0) {
+		$("#qual1").show();
 		$("#qualDelbtn").show();
-	else
-		$("#qualDelbtn").hide();
-	
-	
+		++qual;
+	} 
+	else {
+		var div = $("#qual"+qual).clone(true,true);
+		div.attr('id', 'qual'+ ++qual);
+		div.find('label').first().html('Qualification '+qual);
+		div.find("input:text").val("");
+		div.find("input:text").removeClass('floating-label-form-group-with-value');
+		div.find("div").removeClass('floating-label-form-group-with-value');
+		
+		$("#qual"+(qual-1)).after(div);
+		if(qual >= 1)
+			$("#qualDelbtn").show();
+		else{
+			$("#qualDelbtn").hide();
+			$("#qual1").hide();	
+		}
+	}	
 }
 
 
 
 function addWorkExp(){
-	$('.date').datepicker('destroy');
-	var div = $("#wexp"+wex).clone(true,true);
-	div.attr('id', 'wexp'+ ++wex);
-	div.find('label').first().html('Job '+wex);
-	div.find("select.city").html("<option selected disabled>City</option>");
-	div.find("#wexid").remove();
-	div.find("input:text").val("");
-	div.find("input:text").removeClass('floating-label-form-group-with-value');
-	div.find("div").removeClass('floating-label-form-group-with-value');
-	
-	div.find('#fromDate'+(wex-1)).attr('id','fromDate'+wex);
-	div.find('#toDate'+(wex-1)).attr('id','toDate'+wex);
-	$("#wexp"+(wex-1)).after(div);
-	initializeDatepicker();
-
-	if(wex > 1)
+	if(wex == 0) {
+		$("#wexp1").show();
 		$("#wexpDelbtn").show();
-	else
-		$("#wexpDelbtn").hide();
+		++wex;
+	} 
+	else 
+	{ 
+		$('.date').datepicker("destroy");	
+		var div = $("#wexp"+wex).clone(true,true);
+		div.attr('id', 'wexp'+ ++wex);
+		div.find('label').first().html('Job '+wex);
+		div.find("select.city").html("<option selected disabled>City</option>");
+		div.find("input:text").val("");
+		div.find("input:text").removeClass('floating-label-form-group-with-value');
+		div.find("div").removeClass('floating-label-form-group-with-value');
+		div.find("input:text")
+		div.find('#fromDate'+(wex-1)).attr('id','fromDate'+wex);
+		div.find('#toDate'+(wex-1)).attr('id','toDate'+wex);
+		
+		$("#wexp"+(wex-1)).after(div);
+	
+		initializeDatePicker();    
+		if(wex >= 1)
+			$("#wexpDelbtn").show();
+		else {
+			$("#wexpDelbtn").hide();
+			$("#wexp1").hide();
+		}
+	}
 }
 
 
 
 function addTraining(){
-	$('.date').datepicker('destroy');
-	var div = $("#train"+tr).clone(true,true);
-	div.attr('id', 'train'+ ++tr);
-	div.find('label').first().html('Training '+tr);
-	div.find("select.city").html("<option selected disabled>City</option>");
-	div.find("input:text").val("");
-	div.find("#trid").remove();
-	div.find("input:text").removeClass('floating-label-form-group-with-value');
-	div.find("div").removeClass('floating-label-form-group-with-value');
-	
-	div.find('#trfromDate'+(tr-1)).attr('id','trfromDate'+tr);
-	div.find('#trtoDate'+(tr-1)).attr('id','trtoDate'+tr);
-	$("#train"+(tr-1)).after(div);
-	initializeDatepicker();
-
-	if(tr > 1)
+	if(tr == 0) {
+		$("#train1").show();
 		$("#trDelbtn").show();
-	else
-		$("#trDelbtn").hide();
-
+		++tr;
+	} 
+	else 
+	{ 
+		$('.date').datepicker("destroy");	
+		var div = $("#train"+tr).clone(true,true);
+		div.attr('id', 'train'+ ++tr);
+		div.find('label').first().html('Training '+tr);
+		div.find("select.city").html("<option selected disabled>City</option>");
+		div.find("input:text").val("");
+		div.find("input:text").removeClass('floating-label-form-group-with-value');
+		div.find("div").removeClass('floating-label-form-group-with-value');
+		
+		div.find('#trfromDate'+(tr-1)).attr('id','trfromDate'+tr);
+		div.find('#trtoDate'+(tr-1)).attr('id','trtoDate'+tr);
+		initializeDatePicker();	
+		
+		$("#train"+(tr-1)).after(div);
+		if(tr >= 1)
+			$("#trDelbtn").show();
+		else {
+			$("#trDelbtn").hide();
+			$("#train1").hide();
+		}
+	}
 }
 
 function removeWorkExp(){
-	$("#wexp"+wex).remove();
-	--wex;
-	if(wex > 1)
+	if(wex > 1){
 		$("#wexpDelbtn").show();
-	else
+		$("#wexp"+wex).remove();
+		--wex;
+	}
+	else{
 		$("#wexpDelbtn").hide();
+		$("#wexp"+wex).hide();
+		--wex;
+	}	
 }
 
 
 function removeTraining(){
-	$("#train"+tr).remove();
-	--tr;
-	if(tr > 1)
+	if(tr > 1){
 		$("#trDelbtn").show();
-	else
+		$("#train"+tr).remove();	
+		--tr;
+	}
+	else{
 		$("#trDelbtn").hide();
+		$("#train"+tr).hide();
+		tr--;
+	}
 }
 
 function removeQualification(){
-	$("#qual"+qual).remove();
-	--qual;
-	if(qual > 1)
+	if(qual > 1){
 		$("#qualDelbtn").show();
-	else
+		$("#qual"+qual).remove();
+		--qual;
+	}
+	else {
 		$("#qualDelbtn").hide();
+		$("#qual"+qual).hide();
+		--qual;
+	}
+		
 }
 
-function initializeDatepicker() {
+function initializeDatePicker() {
     $('.date').datepicker({
     	dateFormat:"yy-mm-dd",
     	changeMonth: true,
@@ -196,4 +230,46 @@ function initializeDatepicker() {
         showButtonPanel: true,
         yearRange: '1950:2017'
         });
+}
+
+function validateJson(form){
+	var error_msg = "";
+	var text_reg = new RegExp("([a-zA-Z])\D\w*");
+	var email_reg = new RegExp("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+
+	if( regTester(text_reg, form.personalInfo.name)){
+		if(form.personalInfo.name.length < 3)
+		return "Incorrect Full Name. Please provide proper name";
+	}
+	if( regTester(text_reg, form.personalInfo.email)){
+		return "Invalid Email ID";
+	}		
+	if( regTester(text_reg, form.personalInfo.fatherName)){
+		return "Incorrect Father Name";
+	}		
+	if( regTester(text_reg, form.personalInfo.motherName)){
+		return "Incorrect Mother Name\n";
+	}
+	if( regTester(text_reg, form.personalInfo.gender)){
+		return "Select Gender";
+	}
+	if( regTester(text_reg, form.personalInfo.caste)){
+		return "Select Caste";
+	}		
+	if( form.personalInfo.dob == "")
+		return "Enter Date of Birth";		
+	if( regTester(text_reg, form.personalInfo.maritalStatus))
+		return "Choose Martial Status";
+	if( form.personalInfo.maritalStatus == "Married" && regTester(text_reg, form.personalInfo.spouseName))
+		return "Invalid Spouse Name";
+	if( regTester(text_reg, form.personalInfo.idType))
+		return "Choose Id Type";
+	if( regTester(text_reg, form.personalInfo.idNumber))
+		return "Invalid ID";
+	if( form.personalInfo.contactNumber == "")
+		return "Invalid Contact Number";
+} 
+
+function regTester(regex,v){
+	return ( v == "" || regex.test(v))
 }

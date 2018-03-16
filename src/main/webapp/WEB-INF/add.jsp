@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <head>
 
     <meta charset="utf-8">
@@ -36,12 +36,10 @@
 
          <jsp:include page="menu.jsp"/>
    		<jsp:include page="header.jsp"/>
-	
+		
         <div class="container" style="padding:none" id="searchForms">
             <div class="row">
-                 <form name="addForm" id="addForm">
-<%--                  action="<c:url value="/register/add"/>" method="post"> --%>
-                 
+                 <form name="addForm" id="addForm" action="<c:url value="/register/add"/>" method="post">
                     <div class="col-lg-8 ">
                         <div class="modal-body">
                          <h2>Personal Information <a id="per-btn" data-toggle="collapse" data-target="#personalInfo">
@@ -89,17 +87,26 @@
                               <label >Gender</label>
                                 <select class="form-control col-xs-4 " required id="gender" name="personalInfo[gender]" >
                                	 	<option selected disabled>Gender</option>
-                                	<option value="m">Male</option>
-                                	<option value="f">Female</option>
-                                	<option value="o">Other</option>
+                                	<option value="Male">Male</option>
+                                	<option value="Female">Female</option>
+                                	<option value="Other">Other</option>
                                 </select>
                             </div>
                             <div  class="form-group col-xs-4 floating-label-form-group controls">
-                            	<label>Caste</label>
-                                	<select class="form-control col-xs-4"  required id="caste" name="personalInfo[caste]" >
-                                	<option selected disabled>Caste</option>
-                                	 <c:forEach var="caste" items="${castes}">
-                                		<option value="${caste.value}">${caste.value}</option>
+                            	<label>Religion</label>
+                                <select class="form-control col-xs-4"  required id="religion" name="personalInfo[religion]" >
+                                	<option selected disabled>Religion</option>
+                                	 <c:forEach var="religion" items="${religions}">
+                                		<option value="${religion.value}">${religion.value}</option>
+                                	</c:forEach>
+                                </select>
+                            </div>
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+                            	<label>Category</label>
+                                	<select class="form-control col-xs-6"  required id="category" name="personalInfo[category]" >
+                                	<option selected disabled>Category</option>
+                                	 <c:forEach var="category" items="${categories}">
+                                		<option value="${category.value}">${category.value}</option>
                                 	</c:forEach>
                                 </select>
                             </div>
@@ -129,10 +136,10 @@
                             	<label>ID Type</label>
                                 <select class="form-control col-xs-4"  id="idType" name="personalInfo[idType]" >
                        	    	    <option selected disabled>Id Type</option>
-                       	    	    <option value="dl">Driving License</option>
-                       	    	    <option value="passport">Passport</option>
-                       	    	    <option value="aadhar">Aadhar Card</option>
-                       	    	    <option value="pan">PAN Card</option>
+                       	    	    <option value="Driving License">Driving License</option>
+                       	    	    <option value="Passport">Passport</option>
+                       	    	    <option value="Aadhar Card">Aadhar Card</option>
+                       	    	    <option value="PAN Card">PAN Card</option>
                                 </select>
                             </div>
                         	<div  class="form-group col-xs-4 floating-label-form-group controls">
@@ -171,7 +178,7 @@
                         </div>
                         <br>
                         <div class="row control-group col-lg-offset-2">
-                        	<input type="checkbox" name=personalInfo[computerSkill] >Computer Proficient
+                        	<input type="checkbox" name=personalInfo[computerSkill] >Do You Have Computer Knowledge?
                         </div>    
                     	</div>    
                        </div>
@@ -183,53 +190,19 @@
                          	<span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
                      	</div>
                       <div class="collapse" id="addInfo"> 
-                       <div class="row control-group col-lg-offset-2">
-                            <label>Permanent Address</label>
-                            <br>
-                            <div  class="form-group col-xs-12 floating-label-form-group controls">
-								<label>Address</label> 
-								<input class="form-control" required placeholder="Address" id="address" name="permamentAddress[address]" >
-							</div>
-						</div>
-                       <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
-								<label>State</label> <select class="form-control col-xs-6 state"
-									id="state" name="permamentAddress[state]" required>
-									<option selected disabled>State</option>
-									<c:forEach var="state" items="${states}">
-										<option value="${state}">${state}</option>
-									</c:forEach>
-								</select>
-							</div>
-							<div class="form-group col-xs-6 floating-label-form-group controls">
-								<label>City</label> <select class="form-control col-xs-6 city"
-									id="city" name="permamentAddress[city]" required>
-									<option selected disabled>City</option>
-									<option value="Nagpur">Nagpur</option>
-								</select>
-							</div>
-						</div>   
-                       <div class="row control-group col-lg-offset-2">
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
-								<label>Tehsil/Taluka</label> 
-								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" name="permamentAddress[tehsil]" >
-							</div>
-						</div>
-						
-						
-						<br><br>
-                       <div class="row control-group col-lg-offset-2">
+                       
+                         <div class="row control-group col-lg-offset-2">
                             <label>Temporary Address</label>
                             <br>
                             <div  class="form-group col-xs-12 floating-label-form-group controls">
 								<label>Address</label> 
-								<input class="form-control" required placeholder="Address" id="address" name="temporaryAddress[address]" >
+								<input class="form-control" required placeholder="Address" id="tmpaddress" name="temporaryAddress[address]" >
 							</div>
 						</div>
                        <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>State</label> <select class="form-control col-xs-6 state"
-									id="state" name="temporaryAddress[state]" required>
+									id="tmpstate" name="temporaryAddress[state]" required>
 									<option selected disabled>State</option>
 									<c:forEach var="state" items="${states}">
 										<option value="${state}">${state}</option>
@@ -238,7 +211,7 @@
 							</div>
 							<div class="form-group col-xs-6 floating-label-form-group controls">
 								<label>City</label> <select class="form-control col-xs-6 city"
-									id="city" name="temporaryAddress[city]">
+									id="tmpcity" name="temporaryAddress[city]">
 									<option selected disabled>City</option>
 								</select>
 							</div>
@@ -246,9 +219,44 @@
                        <div class="row control-group col-lg-offset-2">
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
 								<label>Tehsil/Taluka</label> 
-								<input class="form-control" placeholder="Tehsil / Taluka" id="tehsil" name="temporaryAddress[tehsil]" >
+								<input class="form-control" placeholder="Tehsil / Taluka" id="tmptehsil" name="temporaryAddress[tehsil]" >
 							</div>
 						</div>
+                       
+                <br><br>
+           
+                       <div class="row control-group col-lg-offset-2">
+                            <label>Permanent Address</label>&nbsp;&nbsp; <span><button type="button" class="btn btn-default" id="same">Same As Above</button></span>
+                            <br>
+                            <div  class="form-group col-xs-12 floating-label-form-group controls">
+								<label>Address</label> 
+								<input class="form-control" required placeholder="Address" id="praddress" name="permamentAddress[address]" >
+							</div>
+						</div>
+                       <div class="row control-group col-lg-offset-2">
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+								<label>State</label> <select class="form-control col-xs-6 state"
+									id="prstate" name="permamentAddress[state]" required>
+									<option selected disabled>State</option>
+									<c:forEach var="state" items="${states}">
+										<option value="${state}">${state}</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="form-group col-xs-6 floating-label-form-group controls">
+								<label>City</label> <select class="form-control col-xs-6 city"
+									id="prcity" name="permamentAddress[city]" required>
+									<option selected disabled>City</option>
+								</select>
+							</div>
+						</div>   
+                       <div class="row control-group col-lg-offset-2">
+                            <div  class="form-group col-xs-6 floating-label-form-group controls">
+								<label>Tehsil/Taluka</label> 
+								<input class="form-control" placeholder="Tehsil / Taluka" id="prtehsil" name="permamentAddress[tehsil]" >
+							</div>
+						</div>
+						
 						</div>
  					</div>
 
@@ -263,7 +271,7 @@
                            <label>Qualification 1</label>
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
-                                <label>Degree</label>                            
+                                <label>Academic Qualification</label>                            
                                 <select class="form-control col-xs-6"
 									id="degree" name="qualifications[][degree]" required>
 									<option selected disabled>Degree</option>
@@ -566,7 +574,7 @@
                         <div class="row">
                             <div class="form-group col-xs-12">
                             <br><br><br>
-                                <button type="button" class="btn btn-success btn-lg" id="addBtn">Add</button>
+                               	<button type="button" class="btn btn-success btn-lg" id="addBtn">Register</button>
                             </div>
                         </div>
                     </form>
@@ -579,7 +587,6 @@
             <i class="fa fa-chevron-up"></i>
         </a>
     </div>
-
 
 
 	<jsp:include page="footer.jsp"/> 
@@ -596,7 +603,6 @@
 
     <!-- Theme JavaScript -->
     <script src="/static/js/freelancer.js"></script>
-    
     <script src="/static/js/menu.js"></script>
     <script src="/static/js/add.js"></script>
     <script src="/static/js/jquery.serialize-object.min.js"></script>

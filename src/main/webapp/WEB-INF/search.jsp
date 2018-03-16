@@ -17,7 +17,7 @@
     rel="stylesheet" type="text/css" />
     <!-- Theme CSS -->
     <link href="/static/css/freelancer.css" rel="stylesheet">
-
+ 	<link href="/static/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -113,11 +113,21 @@
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div  class="form-group col-xs-4 floating-label-form-group controls">
-                            	<label>Caste</label>
+                            	<label>Religion</label>
                                 <select class="form-control col-xs-4"  id="caste" name="caste" >
-                                <option selected disabled>Caste</option>
-                                <c:forEach var="caste" items="${castes}">
-                                	<option value="${caste}">${caste.value}</option>
+                                <option selected disabled>Religion</option>
+                                <c:forEach var="religion" items="${religions}">
+                                	<option value="${religion}">${religion.value}</option>
+                                </c:forEach>
+                                </select>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                             <div  class="form-group col-xs-4 floating-label-form-group controls">
+                            	<label>Category</label>
+                                <select class="form-control col-xs-4"  id="caste" name="caste" >
+                                <option selected disabled>Category</option>
+                                <c:forEach var="category" items="${categories}">
+                                	<option value="${category}">${category.value}</option>
                                 </c:forEach>
                                 </select>
                                 <p class="help-block text-danger"></p>
@@ -147,7 +157,7 @@
                             <label>List Qualification</label>
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group controls">
-								<label>Qualifications</label> 
+								<label>Academic Qualifications</label> 
 								<select  class="form-control col-xs-6" 	multiple="multiple" id="qualifications" name="qualifications">
 								<c:forEach var="degree" items="${degree}">
 									<option value="${degree}">${degree}</option>
@@ -160,29 +170,29 @@
 						 </div>
  					</div>
                        
-                    <div class="col-lg-8 ">
-                        <div class="modal-body">
-                            <h2>Experience  <a id="exp-btn" data-toggle="collapse" data-target="#expInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
+<!--                     <div class="col-lg-8 "> -->
+<!--                         <div class="modal-body"> -->
+<!--                             <h2>Experience  <a id="exp-btn" data-toggle="collapse" data-target="#expInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2> -->
                      	
-                     <br>
-                    <div class="collapse" id="expInfo">
-                    <div class="row control-group col-lg-offset-2">
-                            <label>Years</label>
-                            <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
-                                <label>Minimum</label>                            
-                                <input class="form-control" placeholder="Minimum Experience"  type="number" id="minAge" name="minExp" >
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls" style="float:right">
-                                <label>Maximum</label>
-                                <input class="form-control" placeholder="Maximum Experience" type="number" id="maxExp" name="maxExp" >
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                      </div>
-                     </div>
-                    </div>   
+<!--                      <br> -->
+<!--                     <div class="collapse" id="expInfo"> -->
+<!--                     <div class="row control-group col-lg-offset-2"> -->
+<!--                             <label>Years</label> -->
+<!--                             <br> -->
+<!--                             <div  class="form-group col-xs-6 floating-label-form-group controls"> -->
+<!--                                 <label>Minimum</label>                             -->
+<!--                                 <input class="form-control" placeholder="Minimum Experience"  type="number" id="minAge" name="minExp" > -->
+<!--                                 <p class="help-block text-danger"></p> -->
+<!--                             </div> -->
+<!--                             <div class="form-group col-xs-6 floating-label-form-group controls" style="float:right"> -->
+<!--                                 <label>Maximum</label> -->
+<!--                                 <input class="form-control" placeholder="Maximum Experience" type="number" id="maxExp" name="maxExp" > -->
+<!--                                 <p class="help-block text-danger"></p> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                       </div> -->
+<!--                      </div> -->
+<!--                     </div>    -->
                        
                     <div class="col-lg-12 ">
                         <div class="modal-body">
@@ -205,29 +215,29 @@
 						</div>
 					</div>   
                     
-                    <div class="col-lg-8 ">
-                        <div class="modal-body">
-                            <h2>Salary <a id="sal-btn" data-toggle="collapse" data-target="#salInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2>
+<!--                     <div class="col-lg-8 "> -->
+<!--                         <div class="modal-body"> -->
+<!--                             <h2>Salary <a id="sal-btn" data-toggle="collapse" data-target="#salInfo"><span><i class="toggle-icon fa fa-chevron-right"></i></span></a></h2> -->
                      	
-                     <br>
-                     <div class="collapse" id="salInfo">
-                    <div class="row control-group col-lg-offset-2">
-                            <label>Salary</label>
-                            <br>
-                            <div  class="form-group col-xs-6 floating-label-form-group controls">
-                                <label>Minimum</label>                            
-                                <input class="form-control" placeholder="Minimum Salary" type="number" id="minSal" name="minSal" >
-                                <p class="help-block text-danger"></p>
-                            </div>
-                            <div class="form-group col-xs-6 floating-label-form-group controls" style="float:right">
-                                <label>Maximum</label>
-                                <input class="form-control" placeholder="Maximum Salary" type="number" id="maxSal" name="maxSal" >
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        </div>
-                        </div>
-                    </div>    
+<!--                      <br> -->
+<!--                      <div class="collapse" id="salInfo"> -->
+<!--                     <div class="row control-group col-lg-offset-2"> -->
+<!--                             <label>Salary</label> -->
+<!--                             <br> -->
+<!--                             <div  class="form-group col-xs-6 floating-label-form-group controls"> -->
+<!--                                 <label>Minimum</label>                             -->
+<!--                                 <input class="form-control" placeholder="Minimum Salary" type="number" id="minSal" name="minSal" > -->
+<!--                                 <p class="help-block text-danger"></p> -->
+<!--                             </div> -->
+<!--                             <div class="form-group col-xs-6 floating-label-form-group controls" style="float:right"> -->
+<!--                                 <label>Maximum</label> -->
+<!--                                 <input class="form-control" placeholder="Maximum Salary" type="number" id="maxSal" name="maxSal" > -->
+<!--                                 <p class="help-block text-danger"></p> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                         </div> -->
+<!--                         </div> -->
+<!--                     </div>     -->
                         
                         <div class="row">
                             <div class="form-group col-xs-12">
@@ -247,7 +257,7 @@
                    <h3>Search Results </h3>
                 </div>
  
-            <table class="table">
+            <table class="table" id="searchTable">
             	<thead>
             		<tr style="font-size: 1.85em;">
             			<th>Reg. ID</th>
@@ -262,7 +272,10 @@
 					<td>${item.registrationId}</td>
 					<td>${item.name}</td>
 					<td>${item.contactNumber}</td>
-					<td><button type="button" class="btn btn-info" onclick="getData(${item.registrationId});">View Details</button></td>        	
+					<td>
+						<button type="button" class="btn btn-info" onclick="getData(${item.registrationId});">View Details</button>
+						<a type="button" class="btn btn-success" target="_blank" href="<c:url value="/print/${item.registrationId}"/>">Print</a>
+					</td>     	
         		</tr>
       		</c:forEach>
         	</tbody>    
@@ -310,14 +323,16 @@
 
     <!-- Contact Form JavaScript -->
     <script src="/static/js/jqBootstrapValidation.js"></script>
+   <script src="/static/js/jquery.dataTables.min.js"></script>
     <script src="/static/js/contact_me.js"></script>
 
     <!-- Theme JavaScript -->
+    
     <script src="/static/js/freelancer.js"></script>
     <script src="/static/js/collapse.js"></script>
+	
     <script src="/static/js/menu.js"></script>
     <script src="/static/js/search.js"></script>
-
 </body>
 
 </html>

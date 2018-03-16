@@ -16,7 +16,7 @@
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="/static/css/freelancer.min.css" rel="stylesheet">
+    <link href="/static/css/freelancer.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="/static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -56,7 +56,7 @@
                         <a href="#loginModal" class="portfolio-link" data-toggle="modal">Login</a>
                     </li>
                     <li>
-                        <a href="<c:url value="/register"/>" class="portfolio-link" >Register</a>
+                        <a href="#signUpModal" class="portfolio-link" data-toggle="modal">Register</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#about">About</a>
@@ -290,6 +290,72 @@
             </div>
         </div>
     </div>
+    
+    <div class="portfolio-modal modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <h2>Sign Up</h2>
+                            <hr class="star-primary">
+                            	<div>
+									<span>If already Signed Up : </span>
+									<a href="#loginModal" class="btn btn-info btn-small" data-toggle="modal" data-dismiss="modal">Login</a>
+								</div>
+                            	<div id="notification" class="alert fade in" style="display:none;" >
+									<a href="#" class="close" data-dismiss="alert">&times;</a>
+									<span id="notification-msg"></span>
+								</div>
+								<br>
+                 	<form name="signInForm" id="signInForm" action="<c:url value="/signUp" />" method="post">
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>UserName</label>
+                                <input type="text" class="form-control" placeholder="Name" id="userName" name="userName" required data-validation-required-message="Please enter your name.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="Password" id="password" name="password" required data-validation-required-message="Please enter your password.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        
+						 <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Email Id</label>
+                                <input class="form-control" placeholder="Email" id="emailId" name="emailId" required type="email" data-validation-required-message="Please enter your email address.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+						<br>
+               			<input type ="hidden" class="form-control col-xs-12" value="ROLE_USER"	id="role" name="role">
+
+						<br><br><br><br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <button id="signUpBtn" type="button" class="btn btn-success btn-lg">Register</button>
+                            </div>
+                        </div>
+                    </form>
+                         <br><br><br>   
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
  
     <!-- jQuery -->
     <script src="static/vendor/jquery/jquery.min.js"></script>
@@ -306,6 +372,7 @@
 
     <!-- Theme JavaScript -->
     <script src="static/js/freelancer.js"></script>
+    <script src="static/js/signIn.js"></script>
 
 </body>
 

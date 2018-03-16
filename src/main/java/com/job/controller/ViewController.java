@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.job.dao.PersonalInfoRepository;
 import com.job.model.PersonalInfo;
@@ -31,5 +32,12 @@ public class ViewController {
 			map.put("type","success");
 		}
 		return "view";
+	}
+	
+	@RequestMapping("/list")
+	@ResponseBody
+	public List<PersonalInfo> list()
+	{
+		return (List<PersonalInfo>) repo.findAll();
 	}
 }

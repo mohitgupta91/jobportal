@@ -56,8 +56,10 @@ public abstract class BaseEntity {
 	protected void onCreate() {
 		this.created = LocalDateTime.now();
 		this.updated = LocalDateTime.now();
-		this.modifiedBy = (WebUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		this.modifiedBy = currentUser instanceof WebUser ? (WebUser) currentUser : null ; 
 	}
+		
 
 	@PostUpdate
 	protected void onUpdate() {

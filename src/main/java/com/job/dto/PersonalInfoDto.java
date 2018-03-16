@@ -3,13 +3,13 @@ package com.job.dto;
 public class PersonalInfoDto {
 
 	private Long registrationId;
-	
+
 	private String name;
 
 	private String gender;
-	
+
 	private String email;
-	
+
 	private String dob;
 
 	private String maritalStatus;
@@ -20,8 +20,10 @@ public class PersonalInfoDto {
 
 	private String motherName;
 
-	private String caste;
-
+	private String religion;
+	
+	private String category;
+	
 	private String contactNumber;
 
 	private String contactNumber2;
@@ -33,13 +35,13 @@ public class PersonalInfoDto {
 	private Boolean computerSkill;
 
 	private String currentSalary;
-	
+
 	private String expectedSalary;
-	
+
 	private Integer expYears = 0;
-	
+
 	private Integer expMonths = 0;
-	
+
 	public String getCurrentSalary() {
 		return currentSalary;
 	}
@@ -55,7 +57,7 @@ public class PersonalInfoDto {
 	public void setExpectedSalary(String expectedSalary) {
 		this.expectedSalary = expectedSalary;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -112,12 +114,12 @@ public class PersonalInfoDto {
 		this.motherName = motherName;
 	}
 
-	public String getCaste() {
-		return caste;
+	public String getReligion() {
+		return religion;
 	}
 
-	public void setCaste(String caste) {
-		this.caste = caste;
+	public void setReligion(String religion) {
+		this.religion = religion;
 	}
 
 	public String getContactNumber() {
@@ -190,5 +192,13 @@ public class PersonalInfoDto {
 
 	public void setRegistrationId(Long registrationId) {
 		this.registrationId = registrationId;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

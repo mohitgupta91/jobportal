@@ -17,7 +17,7 @@ p.small {
 }
 
 a, a:hover, a:focus, a:active, a.active {
-	color: #18BC9C;
+	color: #FF7133;
 	outline: none;
 }
 
@@ -52,7 +52,7 @@ hr.star-light {
 }
 
 hr.star-light:after {
-	background-color: #18BC9C;
+	background-color: #FF7133;
 	color: white;
 }
 
@@ -71,7 +71,7 @@ hr.star-primary:after {
 
 header {
 	text-align: center;
-	background: #18BC9C;
+	background: #FF7133;
 	color: white;
 }
 
@@ -144,7 +144,7 @@ header .intro-text .skills {
 }
 
 .navbar-custom .navbar-nav li a:hover {
-	color: #18BC9C;
+	color: #FF7133;
 	outline: none;
 }
 
@@ -155,13 +155,13 @@ header .intro-text .skills {
 
 .navbar-custom .navbar-nav li.active a {
 	color: white;
-	background: #18BC9C;
+	background: #FF7133;
 }
 
 .navbar-custom .navbar-nav li.active a:hover, .navbar-custom .navbar-nav li.active a:focus,
 	.navbar-custom .navbar-nav li.active a:active {
 	color: white;
-	background: #18BC9C;
+	background: #FF7133;
 }
 
 .navbar-custom .navbar-toggle {
@@ -173,9 +173,9 @@ header .intro-text .skills {
 
 .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus
 	{
-	background-color: #18BC9C;
+	background-color: #FF7133;
 	color: white;
-	border-color: #18BC9C;
+	border-color: #FF7133;
 }
 
 @media ( min-width : 768px) {
@@ -210,7 +210,7 @@ section h2 {
 }
 
 section.success {
-	background: #18BC9C;
+	background: #FF7133;
 	color: white;
 }
 
@@ -345,7 +345,7 @@ section.success {
 }
 
 .floating-label-form-group-with-focus label {
-	color: #18BC9C;
+	color: #FF7133;
 }
 
 form .row:first-child .floating-label-form-group {
@@ -385,7 +385,7 @@ footer .footer-below {
 
 .btn-outline:hover, .btn-outline:focus, .btn-outline:active,
 	.btn-outline.active {
-	color: #18BC9C;
+	color: #FF7133;
 	background: white;
 	border: solid 2px white;
 }
@@ -426,8 +426,8 @@ footer .footer-below {
 
 .btn-success {
 	color: white;
-	background-color: #18BC9C;
-	border-color: #18BC9C;
+	background-color: #FF7133;
+	border-color: #FF7133;
 	font-weight: 700;
 }
 
@@ -449,12 +449,12 @@ footer .footer-below {
 	.btn-success.disabled:active, .btn-success[disabled]:active, fieldset[disabled] .btn-success:active,
 	.btn-success.disabled.active, .btn-success[disabled].active, fieldset[disabled] .btn-success.active
 	{
-	background-color: #18BC9C;
-	border-color: #18BC9C;
+	background-color: #FF7133;
+	border-color: #FF7133;
 }
 
 .btn-success .badge {
-	color: #18BC9C;
+	color: #FF7133;
 	background-color: white;
 }
 
@@ -703,4 +703,23 @@ section-tab {
 	color: #D8000C;
 	background-color: #FFBABA;
 	background-image: url('error.png');
+}
+
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    .printable, .printable * {
+        visibility:visible;
+        display:block;
+    }
+    .screen {
+    	display:none;
+    }
+    
+    .printable {
+        position:absolute;
+        left:0;
+        top:0;
+    }
 }

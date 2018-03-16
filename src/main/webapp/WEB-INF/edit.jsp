@@ -93,40 +93,56 @@
                               <label >Gender</label>
                                 <select class="form-control col-xs-4 " id="gender" name="personalInfo[gender]" >
                                	 	<c:choose>
-                                	 	<c:when test="${data.gender == 'm'}">
-                                	 	<option selected value="m">Male</option>
+                                	 	<c:when test="${data.gender == 'Male'}">
+                                	 	<option selected value="Male">Male</option>
                                 		</c:when>
                                 		<c:otherwise>
-                                			<option value="m">Male</option>
+                                			<option value="Male">Male</option>
                                 		</c:otherwise>
                                 		</c:choose>
                                 		<c:choose>
-                                	 	<c:when test="${data.gender == 'f'}">
-                                	 		<option selected value="f">Female</option>
+                                	 	<c:when test="${data.gender == 'Female'}">
+                                	 		<option selected value="Female">Female</option>
                                 		</c:when>
                                 		<c:otherwise>
-                                			<option value="f">Female</option>
+                                			<option value="Female">Female</option>
                                 		</c:otherwise>
                                 		</c:choose>	<c:choose>
-                                	 	<c:when test="${data.gender == 'o'}">
-                                	 		<option selected value="o">Other</option>
+                                	 	<c:when test="${data.gender == 'Other'}">
+                                	 		<option selected value="Other">Other</option>
                                 		</c:when>
                                 		<c:otherwise>
-                                			<option value="o">Other</option>
+                                			<option value="Other">Other</option>
                                 		</c:otherwise>
                                 		</c:choose>
                                 </select>
                             </div>
                             <div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
-                            	<label>Caste</label>
-                                	<select class="form-control col-xs-4"  id="caste" name="personalInfo[caste]" >
-                                	 <c:forEach var="caste" items="${castes}">
+                            	<label>Religion</label>
+                                	<select class="form-control col-xs-4"  id="religion" name="personalInfo[religion]" >
+                                	 <c:forEach var="religion" items="${religions}">
                                 	 	<c:choose>
-                                	 	<c:when test="${caste.value == data.caste.value}">
-                                			<option selected value="${caste.value}">${caste.value}</option>
+                                	 	<c:when test="${religion.value == data.religion.value}">
+                                			<option selected value="${religion.value}">${religion.value}</option>
                                 		</c:when>
                                 		<c:otherwise>
-                                			<option  value="${caste.value}">${caste.value}</option>
+                                			<option  value="${religion.value}">${religion.value}</option>
+                                		</c:otherwise>
+                                		</c:choose>
+                                	</c:forEach>
+                                </select>
+                            </div>
+                            
+                            <div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
+                            	<label>Category</label>
+                                	<select class="form-control col-xs-4"  id="category" name="personalInfo[category]" >
+                                	 <c:forEach var="category" items="${categories}">
+                                	 	<c:choose>
+                                	 	<c:when test="${category.value == data.category.value}">
+                                			<option selected value="${category.value}">${category.value}</option>
+                                		</c:when>
+                                		<c:otherwise>
+                                			<option  value="${category.value}">${category.value}</option>
                                 		</c:otherwise>
                                 		</c:choose>
                                 	</c:forEach>
@@ -172,10 +188,10 @@
                             	<label>ID Type</label>
                                 <select class="form-control col-xs-4"  id="idType" name="personalInfo[idType]" >
                        	    	    <option selected value="${data.idType}">${data.idType}</option>
-                       	    	    <option value="dl">Driving License</option>
-                       	    	    <option value="passport">Passport</option>
-                       	    	    <option value="aadhar">Aadhar Card</option>
-                       	    	    <option value="pan">PAN Card</option>
+                       	    	    <option value="Driving License">Driving License</option>
+                       	    	    <option value="Passport">Passport</option>
+                       	    	    <option value="Aadhar Card">Aadhar Card</option>
+                       	    	    <option value="PAN Card">PAN Card</option>
                                 </select>
                             </div>
                         	<div  class="form-group col-xs-4 floating-label-form-group floating-label-form-group-with-value controls">
@@ -216,10 +232,10 @@
                         <br>
                         <div class="row control-group col-lg-offset-2">
                         	<c:if test="${data.computerSkill == true }">
-                        		<input type="checkbox"  checked name=personalInfo[computerSkill] >Computer Proficient
+                        		<input type="checkbox"  checked name=personalInfo[computerSkill] >Do You Have Computer Knowledge?
                         	</c:if>
                         	<c:if test="${data.computerSkill == false }">
-                        		<input type="checkbox"  name=personalInfo[computerSkill] >Computer Proficient
+                        		<input type="checkbox"  name=personalInfo[computerSkill] >Do You Have Computer Knowledge?
                         	</c:if>	
                         </div>    
                     	</div>    
@@ -377,13 +393,13 @@
 						</div>
 						</c:forEach>
 						<c:if test="${qualIndex==0}">
-						<c:set var="qualIndex" value="${qualIndex+1}" />
-						<div id="qual1">
+						<c:set var="qualIndex" value="${qualIndex}" />
+						<div id="qual1" style="display:none;">
                      	<div class="row control-group col-lg-offset-2">
                            <label>Qualification 1</label>
                             <br>
                             <div  class="form-group col-xs-6 floating-label-form-group floating-label-form-group-with-value controls">
-                                <label>Degree</label>                            
+                                <label>Academic Qualification</label>                            
                                 <select class="form-control col-xs-6"
 									id="degree" name="qualifications[][degree]">
 									<option selected disabled>Degree</option>
@@ -513,8 +529,8 @@
                      </c:if>
                      </c:forEach>
                      <c:if test="${wexIndex == 0 }">
-                     <c:set var="wexIndex" value="${wexIndex+1}" />
-                     <div id="wexp1">
+                     <c:set var="wexIndex" value="${wexIndex}" />
+                     <div id="wexp1" style="display:none;">
                      <div class="row control-group col-lg-offset-2">
                            <label>Job 1</label>
                             <br>
@@ -670,8 +686,8 @@
                      </c:if>
                      </c:forEach>
                      <c:if test="${trIndex==0 }">
-                     <div id="train1">
-                     <c:set var="trIndex" value="${trIndex+1 }"/>
+                     <div id="train1" style="display:none;">
+                     <c:set var="trIndex" value="${trIndex}"/>
                      <div class="row control-group col-lg-offset-2">
                      	
                            <label>Training 1</label>
@@ -838,7 +854,8 @@
 								<c:if test="${data.preferance.shift == 'NIGHT' }">
 									<option selected value="NIGHT">Night Shift</option>
 									<option value="DAY">Day Shift</option>
-									<option value="ANY">Any Shift</option></c:if>
+									<option value="ANY">Any Shift</option>
+								</c:if>
 								<c:if test="${data.preferance.shift == 'DAY' }">
 									<option selected value="DAY">Day Shift</option>
 									<option selected value="NIGHT">Night Shift</option>
@@ -847,6 +864,11 @@
 									<option selected value="ANY">Any Shift</option>
 									<option value="DAY">Day Shift</option>
 									<option value="NIGHT">Night Shift</option>
+								</c:if>
+								<c:if test="${empty data.preferance.shift }">
+									<option value="NIGHT">Night Shift</option>
+									<option value="DAY">Day Shift</option>
+									<option value="ANY">Any Shift</option>
 								</c:if>
 							</select>   
                         	</div>
@@ -907,6 +929,13 @@
 
 	<jsp:include page="footer.jsp"/> 
     <!-- jQuery -->
+    <script type="text/javascript">
+		var qual = ${qualIndex};
+		var tr = ${trIndex};
+		var wex = ${wexIndex};
+		var admin = ${admin};
+	</script>
+    
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/jquery/jquery.validate.min.js"></script>
 

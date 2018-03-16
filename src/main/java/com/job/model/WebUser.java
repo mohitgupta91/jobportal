@@ -45,6 +45,9 @@ public class WebUser extends BaseEntity implements UserDetails {
 	@Column(name = "email_id")
 	private String emailId;
 
+	@Column(name = "regId", unique = true)
+	private Long registerationID;
+	
 	@Column(name = "role", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -128,6 +131,14 @@ public class WebUser extends BaseEntity implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return enabled;
+	}
+
+	public Long getRegisterationID() {
+		return registerationID;
+	}
+
+	public void setRegisterationID(Long registerationID) {
+		this.registerationID = registerationID;
 	}
 
 }

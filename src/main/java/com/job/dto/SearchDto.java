@@ -9,7 +9,8 @@ public class SearchDto {
 	private String state;
 	private String city;
 	private String gender;
-	private String caste;
+	private String religion;
+	private String category;
 	private String maritalStatus;
 	private List<String> qualifications;
 	private Integer minExp;
@@ -58,12 +59,12 @@ public class SearchDto {
 		this.gender = gender;
 	}
 
-	public String getCaste() {
-		return caste;
+	public String getReligion() {
+		return religion;
 	}
 
-	public void setCaste(String caste) {
-		this.caste = caste;
+	public void setReligion(String religion) {
+		this.religion = religion;
 	}
 
 	public String getMaritalStatus() {
@@ -121,13 +122,20 @@ public class SearchDto {
 	public void setMaxSal(Integer maxSal) {
 		this.maxSal = maxSal;
 	}
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	@Override
 	public String toString() {
 		return "SearchDto [minAge=" + minAge + ", maxAge=" + maxAge + ", state=" + state + ", city=" + city
-				+ ", gender=" + gender + ", caste=" + caste + ", maritalStatus=" + maritalStatus + ", qualifications="
-				+ qualifications + ", minExp=" + minExp + ", maxExp=" + maxExp + ", jobType=" + jobType + ", minSal="
-				+ minSal + ", maxSal=" + maxSal + "]";
+				+ ", gender=" + gender + ", religion=" + religion + ", category=" + category + ", maritalStatus="
+				+ maritalStatus + ", qualifications=" + qualifications + ", minExp=" + minExp + ", maxExp=" + maxExp
+				+ ", jobType=" + jobType + ", minSal=" + minSal + ", maxSal=" + maxSal + "]";
 	}
 
 }

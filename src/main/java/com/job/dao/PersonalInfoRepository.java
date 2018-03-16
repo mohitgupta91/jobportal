@@ -6,15 +6,17 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.job.constants.Caste;
+import com.job.constants.Category;
 import com.job.constants.JobTypes;
+import com.job.constants.Religion;
 import com.job.model.PersonalInfo;
 
 @Repository
-public interface PersonalInfoRepository extends CrudRepository<PersonalInfo, Long>{
+public interface PersonalInfoRepository extends CrudRepository<PersonalInfo, Long>, PagingAndSortingRepository<PersonalInfo, Long>{
 	
 	@Query("Select p from PersonalInfo p  where p.registrationId = :regId")
 	PersonalInfo findOne(@Param("regId") Long regId);
@@ -22,7 +24,7 @@ public interface PersonalInfoRepository extends CrudRepository<PersonalInfo, Lon
 	@Query("Select p from PersonalInfo p where p.registrationId IN :regId")
 	List<PersonalInfo> findByRegistrationId(@Param("regId") Set<Long> regId);
 	
-	List<PersonalInfo> findByCaste(Caste caste);
+	List<PersonalInfo> findByReligion(Religion religion);
 	
 	List<PersonalInfo> findByGender(String gender);
 	
@@ -67,5 +69,9 @@ public interface PersonalInfoRepository extends CrudRepository<PersonalInfo, Lon
 	List<PersonalInfo> findByMinDob(@Param("minDob")LocalDate minDob);
 
 	List<PersonalInfo> findByJobRequirement(JobTypes jobRequirement);
+
+	Iterable<PersonalInfo> findByCategory(Category category);
+	
+//	List<PersonalInfo> findAll(Page)
 
 }
